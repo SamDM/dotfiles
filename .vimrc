@@ -33,10 +33,6 @@ if has('nvim')
     set runtimepath+=/usr/share/vim/vimfiles,/usr/share/vim/vim74,/usr/share/vim/vimfiles/after
 endif
 
-" Use Vim settings, rather than Vi settings (much better!). This must be
-" first, because it changes other options as a side effect.
-set nocompatible
-
 " Enable vim-airline. DejaVu font with powerline patch works ok
 set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 10
 set laststatus=2
@@ -82,8 +78,8 @@ set backupdir=~/.vim/backdir
 " Persistent undo history, this is a blessing
 set undodir=~/.vim/undodir
 set undofile
-set undolevels=1000 "maximum number of changes that can be undone
-set undoreload=1000 "maximum number lines to save for undo on a buffer reload
+set undolevels=100 "maximum number of changes that can be undone
+set undoreload=100 "maximum number lines to save for undo on a buffer reload
 
 if !has('nvim')
     " Only for gui, remove some clutter
@@ -120,25 +116,6 @@ filetype plugin indent on
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") |
             \ exe "normal! g'\"zz" | endif
 
-" Fix for slow scrolling when cursorline is enabled
-let g:boostmove=0
-set updatetime=50
-au CursorMoved  * call BoostMoveON()
-au CursorHold   * call BoostMoveOFF()
-function! BoostMoveON()
-    if (g:boostmove == 0)
-        let g:boostmove=1
-        setlocal nocursorline
-    endif
-endfunction
-function! BoostMoveOFF()
-    if g:boostmove==1
-        let g:boostmove=0
-        setlocal cursorline
-    endif
-endfunction
-" End of fix
-
 "-------------------------------------------------------------------------------
 " general mappings
 "-------------------------------------------------------------------------------
@@ -154,19 +131,6 @@ let mapleader = "\\"
 
 " Press jj to exit insert mode, you'll never have to actually type jj in code
 imap jj <esc>
-
-" Zap past next character with Ctrl-L
-imap <c-l> <right>
-
-" Function to find the cursor
-function! CursorPing()
-    set cursorline cursorcolumn
-    redraw
-    sleep 100m
-    set nocursorcolumn
-endfunction
-" Find cursor
-map <leader>p <esc>:call CursorPing()<CR>
 
 " Turn of last search highlight
 map <leader>h <esc>:noh<cr>:echo "cleared search highlight"<cr>
@@ -190,7 +154,6 @@ vnoremap <c-c> "+y
 " Easy buffer navigation
 map <leader>b <esc>:bnext<CR>
 map <leader>B <esc>:bpervious<CR>
-
 
 if has('nvim')
     " escape terminal mode
@@ -284,18 +247,3 @@ let g:syntastic_perl_checkers = ['perl', 'podchecker']
 "let g:Perl_MapLeader  = '|'
 autocmd FileType perl map <leader>rr <esc>:!perl -w %<enter>
 autocmd FileType perl map <leader>rd <esc>:!perl -d %<enter>
-
-"-------------------------------------------------------------------------------
-" for haskell
-"-------------------------------------------------------------------------------
-
-au FileType haskell nnoremap <buffer> <leader>t :HdevtoolsType<CR>
-au FileType haskell nnoremap <buffer> <silent> <leader>c :HdevtoolsClear<CR>
-au FileType haskell nnoremap <buffer> <silent> <leader>i :HdevtoolsInfo<CR>
-
-au BufEnter *.hs compiler ghc
-let g:haddock_browser="/usr/bin/google-chrome-stable"
-
-au FileType haskell nnoremap <buffer> <silent> <leader>rc :w<CR>:!ghc %<CR>
-au FileType haskell nnoremap <buffer> <silent> <leader>rr :w<CR>:!ghc %<CR>:!./%:r<CR>
-au FileType haskell nnoremap <buffer> <silent> <leader>ri :w<CR>:!ghc %<CR>:!ghci %:r<CR>
