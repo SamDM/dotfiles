@@ -1,5 +1,6 @@
 " This vimrc is partly created by me, and partly copied from various internet
 " sources. Good sources are:
+"    http://vim.wikia.com/wiki/Vim_Tips_Wiki
 "    http://www.vimbits.com
 "    http://rayninfo.co.uk/vimtips.html
 "
@@ -43,33 +44,19 @@ let g:airline_detect_paste=1 " enable paste detection >
 let g:airline_detect_iminsert=0 " enable iminsert detection >
 let g:airline_theme="bubblegum"
 
-" Allow backspacing over everything in insert mode
-set backspace=indent,eol,start
-
-set history=50   " keep 50 lines of command line history
-set ruler        " show the cursor position all the time
-set showcmd      " display incomplete commands
-set incsearch    " do incremental searching
-set number       " show line numbers
-set nowrap       " don't wrap lines that are too long for the screen
-set sidescroll=1 " smoother sidescrolling
-set hidden       " easier file switching
-set autoindent   " always set autoindenting on
-
-" Split to right
+" some sane defaults
+syntax on
+set ruler
+set showcmd
 set splitright
-
-" Folding
+set number
+set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
 set foldmethod=syntax
-
-" Tab options. Spaces are better than a tab character
-set expandtab
-set smarttab
-set shiftround
-
-" Who wants an 8 character tab?  Not me!
-set shiftwidth=4
-set softtabstop=4
+set foldlevelstart=20
+set hidden
+filetype plugin on
+highlight ColorColumn ctermbg=red
+match ColorColumn '\%81v'
 
 " Backup options
 set backup
@@ -81,20 +68,8 @@ set undofile
 set undolevels=100 "maximum number of changes that can be undone
 set undoreload=100 "maximum number lines to save for undo on a buffer reload
 
-if !has('nvim')
-    " Only for gui, remove some clutter
-    set guioptions-=m  "remove menu bar
-    set guioptions-=T  "remove toolbar
-    set guioptions-=r  "remove right-hand scroll bar
-    set guioptions-=L  "remove left-hand scroll bar
-endif
-
-" In many terminal emulators the mouse works just fine, thus enable it.
-set mouse=a
-
 " Switch syntax highlighting on, when the terminal has colors. Also switch on
 " highlighting the last used search pattern.
-syntax on
 set t_Co=256
 set hlsearch
 " override color scheme to make background transparent
@@ -103,14 +78,6 @@ set hlsearch
 let g:rehash256 = 1 " tells molokai to use 256 color scheme
 colorscheme molokai
 " Higlight 81th column (must come after theme loading to override theme color)
-highlight ColorColumn ctermbg=234
-set colorcolumn=81
-
-" Filetype specific indenting
-filetype plugin indent on
-
-" Automatically reload vimrc when it's saved
-"au BufWritePost .vimrc so ~/.vimrc
 
 " Go to last line I edited before closing and center it
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") |
@@ -156,9 +123,12 @@ map <leader>b <esc>:bnext<CR>
 map <leader>B <esc>:bpervious<CR>
 
 if has('nvim')
+    " Easily save stuff with Ctrl-s
+    map <C-s> :w<CR>
+    imap <C-s> <esc>:w<CR>
     " escape terminal mode
     tnoremap <A-q> <C-\><C-n>
-    " Seemless navigation between terminal and other windows
+    " Seamless navigation between terminal and other windows
     tnoremap <A-h> <C-\><C-n><C-w>h
     tnoremap <A-j> <C-\><C-n><C-w>j
     tnoremap <A-k> <C-\><C-n><C-w>k
@@ -233,6 +203,12 @@ map <leader>us <esc>:call UltiSnips#ListSnippets()<CR>
 set grepprg=grep\ -nH\ $*
 let g:tex_flavor = "latex"
 let g:syntastic_tex_checkers = []
+
+"-------------------------------------------------------------------------------
+" for Cpp
+"-------------------------------------------------------------------------------
+
+autocmd FileType cpp vmap <leader>rf :!clang-format<CR>
 
 "-------------------------------------------------------------------------------
 " for perl
