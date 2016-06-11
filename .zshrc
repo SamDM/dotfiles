@@ -12,38 +12,28 @@ zstyle :compinstall filename '/home/sam/.zshrc'
 autoload -Uz compinit
 compinit
 
-#-------------------------------------------------------------------------------
-# Plugins
-#-------------------------------------------------------------------------------
+export PATH=/home/sam/.local/bin:/home/sam/Executable:$PATH
 
-# Load zsh-autosuggestions.
-source /usr/share/zsh/plugins/zsh-autosuggestions/autosuggestions.zsh
-
-# Accept suggestions without leaving insert mode
-bindkey '^f' vi-forward-word
-bindkey '^T' autosuggest-execute-suggestion
-
-# Starting the autosuggest is done in the promptline function, this is a bit
-# ugly. I should find some way to split this out in two parts that work
-# independently
+# Enables colors and italics in neovim
+export NVIM_TUI_ENABLE_TRUE_COLOR=1
+export EDITOR=nvim
 
 #-------------------------------------------------------------------------------
 # Prompt
 #-------------------------------------------------------------------------------
 
 # Required for color codes to work in prompt
-export TERM="xterm-256color"
+#export TERM=screen-256color
+export TERM=st-256color
 
 function zle-line-init zle-keymap-select {
-    PRE=$'%F{15}%M-%n-%L%f %F{15}%30<...<%~%<<%f%F{236} ❖ %f%F{15}%w %T%f%F{7} %f%(?..%F{125}✘%?%f)\n'
+    PRE=$'%F{15}%M-%n-%L%f %F{15}%30<...<%~%<<%f%F{236} ❖ %f%F{15}%w %T%f%F{7} %f%(?..%F{125}✘%?%f )%(1j.%F{215}::%j.%f)\n'
     MOD="${${KEYMAP/vicmd/%F{198\}⚡%f }/(main|viins)/%F{87\}⚡%f }"
     PS1=$PRE$MOD
     zle reset-prompt
 
-    # Enable autosuggestions automatically.
-    zle autosuggest-start
 }
- 
+
 zle -N zle-line-init
 zle -N zle-keymap-select
 
@@ -77,17 +67,14 @@ bindkey '^x' push-input
 #-------------------------------------------------------------------------------
 
 # Some common options
-alias oldvim='/usr/bin/vim'
-alias vim='nvim'
 alias ls='ls --color=auto'
-alias ll='ls -la --color=auto'
+alias ll='ls -lah --color=auto'
 alias grep='grep --color=auto'
-alias tmux='tmux -2' # start tmux in full 256 color mode
 
 # Shortcuts and random stuff
 alias partinfo='lsblk -o NAME,SIZE,FSTYPE,MOUNTPOINT,UUID,LABEL,PARTUUID,PARTTYPE'
 alias perlconsole='perl -de 0'
-alias clearpackcache='paccache -ruk0 && paccache -ruk0'
+alias clearpackcache='sudo paccache -r && sudo paccache -ruk0'
 alias listvimplugins='pacman -Qs vim-plugins | grep vim-plugins | cut -d/ -f2 | sed "s/ (.*)//g"'
 
 # Start apache server
@@ -98,10 +85,35 @@ alias startmysql='sudo systemctl start mysqld.service'
 alias gittracked='git ls-tree -r master --name-only'
 
 # Use vim as a pager
-alias vip='vim -R -'
+alias vip='nvim -R -'
 # Easily launch a desktop app as a child process of the ?? thread from within
 # the terminal
 alias opn='xdg-open'
+
+# Turn pc into WiFi hotspot
+alias hotspot-whoson='create_ap --list-clients $(create_ap --list-running | tail -n1 | awk "{print $1}")'
+alias hotspot-running='create_ap --list-running'
+
+# Test if terminal is truecolor or not
+function terminaltest {
+  awk 'BEGIN{
+  s="/\\/\\/\\/\\/\\"; s=s s s s s s s s;
+  for (colnum = 0; colnum<77; colnum++) {
+      r = 255-(colnum*255/76);
+      g = (colnum*510/76);
+      b = (colnum*255/76);
+      if (g>255) g = 510-g;
+      printf "\033[48;2;%d;%d;%dm", r,g,b;
+      printf "\033[38;2;%d;%d;%dm", 255-r,255-g,255-b;
+      printf "%s\033[0m", substr(s,colnum+1,1);
+  }
+  printf "\n";
+  }'
+  echo -e "\e[1mbold\e[0m"
+  echo -e "\e[3mitalic\e[0m"
+  echo -e "\e[4munderline\e[0m"
+  echo -e "\e[9mstrikethrough\e[0m"
+}
 
 #===============================================================================
 # Disabled options
@@ -115,7 +127,7 @@ alias opn='xdg-open'
 #powerline-daemon -q
 #. /usr/lib/python3.4/site-packages/powerline/bindings/zsh/powerline.zsh
 
-# . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+# . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
 
 # Or use fancy prompt
 # must be called every time input mode changes
