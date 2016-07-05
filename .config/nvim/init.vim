@@ -27,27 +27,23 @@
 " general settings
 "-------------------------------------------------------------------------------
 
-" Plugins installed with pacman don't end up in the runtime path of neovim,
-" therefore the default vim runtime path is added here to neovims runtime
-" path.
-if has('nvim')
-    set runtimepath+=/usr/share/vim/vimfiles,/usr/share/vim/vim74,/usr/share/vim/vimfiles/after
-endif
-
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.config/nvim/plugged')
 
 "Plug 'equalsraf/neovim-gui-shim'
-Plug 'rust-lang/rust.vim'
-Plug 'morhetz/gruvbox'
+"Plug 'rust-lang/rust.vim'
+"Plug 'morhetz/gruvbox'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'jalvesaq/Nvim-R'
+"Plug 'jalvesaq/Nvim-R'
 Plug 'lervag/vimtex'
-Plug 'chrisbra/Recover.vim'
+Plug 'scrooloose/nerdtree'
+Plug 'tyrannicaltoucan/vim-deep-space'
 
-Plug 'neovimhaskell/haskell-vim'
-Plug 'bitc/vim-hdevtools'
-Plug 'neomake/neomake'
+"Plug 'chrisbra/Recover.vim'
+
+"Plug 'neovimhaskell/haskell-vim'
+"Plug 'bitc/vim-hdevtools'
+"Plug 'neomake/neomake'
 
 call plug#end()
 
@@ -63,7 +59,7 @@ let g:airline_powerline_fonts = 1
 let g:airline_detect_modified=1 " enable modified detection
 let g:airline_detect_paste=1    " enable paste detection
 let g:airline_detect_iminsert=0 " enable iminsert detection
-let g:airline_theme="ubaryd"
+let g:airline_theme="tomorrow"
 
 " some sane defaults
 syntax on
@@ -80,7 +76,6 @@ filetype on
 filetype plugin on
 filetype indent on
 highlight ColorColumn ctermbg=red
-match ColorColumn '\%81v'
 
 " allow for project vimrc overrides
 set exrc
@@ -88,10 +83,10 @@ set secure
 
 " Backup options
 set backup
-set backupdir=~/.vim/backdir
+set backupdir=~/.config/nvim/backdir
 
 " Persistent undo history, this is a blessing
-set undodir=~/.vim/undodir
+set undodir=~/.config/nvim/undodir
 set undofile
 set undolevels=100 "maximum number of changes that can be undone
 set undoreload=100 "maximum number lines to save for undo on a buffer reload
@@ -100,10 +95,10 @@ set undoreload=100 "maximum number lines to save for undo on a buffer reload
 " highlighting the last used search pattern.
 set t_Co=256
 set hlsearch
-let g:gruvbox_contrast_dark="dark"
-colorscheme gruvbox
-set bg=dark
+
+colorscheme deep-space
 " Higlight 81th column (must come after theme loading to override theme color)
+match ColorColumn '\%81v'
 
 " Go to last line I edited before closing and center it
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") |
