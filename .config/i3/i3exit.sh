@@ -4,8 +4,8 @@
 # 'https://faq.i3wm.org/question/239/how-do-i-suspendlockscreen-and-logout.1.html'
 
 lock() {
-    # JPG's don't work, I'll have to change this
-    i3lock -i /run/media/sam/storage-parititon/Dropbox/4_Albums/Screensaver/Nature/alps-sky.jpg
+    # requires scrot and ImageMagick to work
+    bash ~/.config/i3/lock_helper.bash
 }
 
 case "$1" in
