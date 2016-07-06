@@ -191,7 +191,7 @@
 #
 
     # Reminder: see (R1) above
-    set $mode_system System: (l) lock, (e) logout, (s) suspend, (r) reboot, (p) shutdown
+    set $mode_system System: l  | e  | s  | r  | p 
     mode "$mode_system" {
         bindsym l exec --no-startup-id sh ~/.config/i3/i3exit.sh lock      , mode "default"
         bindsym e exec --no-startup-id sh ~/.config/i3/i3exit.sh logout    , mode "default"
