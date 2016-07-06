@@ -71,8 +71,8 @@
 # Workspaces:
 #
 
-    set $ws01 "1"
-    set $ws02 "2"
+    set $ws01 "1 "
+    set $ws02 "2 "
     set $ws03 "3"
     set $ws04 "4"
     set $ws05 "5"
@@ -80,7 +80,7 @@
     set $ws07 "7"
     set $ws08 "8"
     set $ws09 "9"
-    set $ws10 "10"
+    set $ws10 "10 "
 
     # switch to workspace
     bindsym $mod+1 workspace $ws01
@@ -215,6 +215,7 @@
 # Define colors
 #
 
+    set $lime     #9EFD68
     set $snow     #DDECEF
     set $skyblue  #BFD9DA
     set $rain     #87AAAE
@@ -234,11 +235,11 @@
 
     # Window Colours
     # class                 border   backgr.  text     indicator  child_border
-    client.focused          $sea     $sea     $grey3   $ice       $sea
-    client.focused_inactive $grey3   $grey3   $sea     $ice       $grey3
-    client.unfocused        $grey3   $grey3   $skyblue $ice       $grey3
-    client.urgent           $blush   $grey3   $blush   $ice       $blush
-    client.placeholder      $grey3   $grey3   $skyblue $ice       $grey3
+    client.focused          $sea     $sea     $grey3   $lime     $sea
+    client.focused_inactive $grey3   $grey3   $sea     $lime     $grey3
+    client.unfocused        $grey3   $grey3   $skyblue $lime     $grey3
+    client.urgent           $blush   $grey3   $blush   $lime     $blush
+    client.placeholder      $grey3   $grey3   $skyblue $lime     $grey3
 
     client.background       $grey3
 
@@ -261,9 +262,24 @@
     bar {
         font pango:DejaVu Sans Mono, Awesome 9
 
-        mode hide
-        hidden_state hide
-        modifier Mod4
+        # Auto-hide i3bar
+        mode           hide
+        hidden_state   hide
+        modifier       Mod4
 
         status_command i3blocks
+
+        # Bar colors
+        colors {
+            background $grey3
+            statusline $skyblue
+            separator  $skyblue
+
+            # class            #border  #backgr. #text
+            focused_workspace  $grey3   $grey3    $sea
+            active_workspace   $grey3   $grey3    $skyblue
+            inactive_workspace $grey3   $grey3    $skyblue
+            urgent_workspace   $blush   $blush    $grey3
+            binding_mode       $blush   $blush    $grey3
+        }
     }
