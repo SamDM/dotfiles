@@ -7,26 +7,17 @@
 #
 
     # set background
-    exec feh --bg-scale /run/media/sam/storage-parititon/Dropbox/4_Albums/Screensaver/Nature/alps-sky.jpg &
+    exec feh --bg-scale /run/media/sam/storage-parititon/Dropbox/4_Albums/Screensaver/Nature/alps-sky.jpg
     # launch network manager
-    exec --no-startup-id nm-applet &
+    exec --no-startup-id nm-applet
     # start dropbox
-    exec dropbox &
-
-#
-# Appearance
-#
-
-    # Remove title bars
-    new_window 1pixel
-    # Font for window titles.
-    font pango:DejaVu Sans Mono, Awesome 8
+    exec dropbox
 
 ################################################################################
 # Keybindings
 ################################################################################
 
-# reminder:
+# Reminder:
 # Mod1 = Alt
 # Mod4 = OS key
 
@@ -58,9 +49,9 @@
     bindsym $mod+k focus up
     bindsym $mod+l focus right
     # or use $mod+[up|down|left|right]
-    bindsym $mod+Left focus left
-    bindsym $mod+Down focus down
-    bindsym $mod+Up focus up
+    bindsym $mod+Left  focus left
+    bindsym $mod+Down  focus down
+    bindsym $mod+Up    focus up
     bindsym $mod+Right focus right
 
     # _move_ the focused window with the same, but add Shift
@@ -69,37 +60,51 @@
     bindsym $mod+Shift+k move up
     bindsym $mod+Shift+l move right
     # ditto, with arrow keys
-    bindsym $mod+Shift+Left move left
-    bindsym $mod+Shift+Down move down
-    bindsym $mod+Shift+Up move up
+    bindsym $mod+Shift+Left  move left
+    bindsym $mod+Shift+Down  move down
+    bindsym $mod+Shift+Up    move up
     bindsym $mod+Shift+Right move right
 #
 # Workspaces:
 #
+
+    set $ws01 "1"
+    set $ws02 "2"
+    set $ws03 "3"
+    set $ws04 "4"
+    set $ws05 "5"
+    set $ws06 "6"
+    set $ws07 "7"
+    set $ws08 "8"
+    set $ws09 "9"
+    set $ws10 "10"
+
     # switch to workspace
-    bindsym $mod+1 workspace 1
-    bindsym $mod+2 workspace 2
-    bindsym $mod+3 workspace 3
-    bindsym $mod+4 workspace 4
-    bindsym $mod+5 workspace 5
-    bindsym $mod+6 workspace 6
-    bindsym $mod+7 workspace 7
-    bindsym $mod+8 workspace 8
-    bindsym $mod+9 workspace 9
-    bindsym $mod+0 workspace 10
+    bindsym $mod+1 workspace $ws01
+    bindsym $mod+2 workspace $ws02
+    bindsym $mod+3 workspace $ws03
+    bindsym $mod+4 workspace $ws04
+    bindsym $mod+5 workspace $ws05
+    bindsym $mod+6 workspace $ws06
+    bindsym $mod+7 workspace $ws07
+    bindsym $mod+8 workspace $ws08
+    bindsym $mod+9 workspace $ws09
+    bindsym $mod+0 workspace $ws10
     # move focused container to workspace
-    bindsym $mod+Shift+1 move container to workspace 1
-    bindsym $mod+Shift+2 move container to workspace 2
-    bindsym $mod+Shift+3 move container to workspace 3
-    bindsym $mod+Shift+4 move container to workspace 4
-    bindsym $mod+Shift+5 move container to workspace 5
-    bindsym $mod+Shift+6 move container to workspace 6
-    bindsym $mod+Shift+7 move container to workspace 7
-    bindsym $mod+Shift+8 move container to workspace 8
-    bindsym $mod+Shift+9 move container to workspace 9
-    bindsym $mod+Shift+0 move container to workspace 10
-    # Note: workspaces can have any name you want, not just numbers.
-    # We just use 1-10 as the default.
+    bindsym $mod+Shift+1 move container to workspace $ws01
+    bindsym $mod+Shift+2 move container to workspace $ws02
+    bindsym $mod+Shift+3 move container to workspace $ws03
+    bindsym $mod+Shift+4 move container to workspace $ws04
+    bindsym $mod+Shift+5 move container to workspace $ws05
+    bindsym $mod+Shift+6 move container to workspace $ws06
+    bindsym $mod+Shift+7 move container to workspace $ws07
+    bindsym $mod+Shift+8 move container to workspace $ws08
+    bindsym $mod+Shift+9 move container to workspace $ws09
+    bindsym $mod+Shift+0 move container to workspace $ws10
+
+    # programs with fixed workspace
+    assign [class="Firefox"] $ws02
+
 #
 # Layout stuff:
 #
@@ -135,22 +140,16 @@
 
     # resize window (you can also use the mouse for that)
     mode "resize" {
-        # These bindings trigger as soon as you enter the resize mode
 
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 10 px or 10 ppt
-        bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym semicolon resize grow width 10 px or 10 ppt
+        bindsym h resize shrink width  10 px or 10 ppt
+        bindsym j resize grow   height 10 px or 10 ppt
+        bindsym k resize shrink height 10 px or 10 ppt
+        bindsym l resize grow   width  10 px or 10 ppt
 
-        # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
+        bindsym Left  resize shrink width  10 px or 10 ppt
+        bindsym Down  resize grow   height 10 px or 10 ppt
+        bindsym Up    resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow   width  10 px or 10 ppt
 
         # back to normal: Enter or Escape
         bindsym Return mode "default"
@@ -163,7 +162,9 @@
 # Media
 #
 
-    set $mode_media volume: j  | k  | m 
+    set $mode_media Volume: j  | k  | m 
+    # Reminder (R1): don't quote variables used as mode name, because it will
+    # be quoted twice due to the line below.
     mode "$mode_media" {
         # audio controls
         bindsym k exec sh ~/.config/i3/pactl_helper.sh --up
@@ -186,6 +187,7 @@
 # System options
 #
 
+    # Reminder: see (R1) above
     set $mode_system System: (l) lock, (e) logout, (s) suspend, (r) reboot, (p) shutdown
     mode "$mode_system" {
         bindsym l exec --no-startup-id sh ~/.config/i3/i3exit.sh lock      , mode "default"
@@ -205,6 +207,14 @@
 ################################################################################
 # Appearance
 ################################################################################
+
+#
+# Windowing options
+#
+    # Remove title bars
+    new_window 1pixel
+    # Font for window titles.
+    font pango:DejaVu Sans Mono, Awesome 8
 
 #
 # Gaps and borders
