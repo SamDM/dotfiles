@@ -170,9 +170,9 @@
     # be quoted twice due to the line below.
     mode "$mode_media" {
         # audio controls
-        bindsym k exec sh ~/.config/i3/pactl_helper.sh --up
-        bindsym j exec sh ~/.config/i3/pactl_helper.sh --down
-        bindsym m exec sh ~/.config/i3/pactl_helper.sh --togmute
+        bindsym k exec bash ~/.config/i3/pactl_helper.bash --up
+        bindsym j exec bash ~/.config/i3/pactl_helper.bash --down
+        bindsym m exec bash ~/.config/i3/pactl_helper.bash --togmute
 
         # back to normal: Enter or Escape
         bindsym Return mode "default"
@@ -182,9 +182,9 @@
     bindsym $mod+Control+m mode "$mode_media"
 
     # audio control
-    bindsym XF86AudioRaiseVolume exec sh ~/.config/i3/pactl_helper.sh --up
-    bindsym XF86AudioLowerVolume exec sh ~/.config/i3/pactl_helper.sh --down
-    bindsym XF86AudioMute        exec sh ~/.config/i3/pactl_helper.sh --togmute
+    bindsym XF86AudioRaiseVolume exec bash ~/.config/i3/pactl_helper.bash --up
+    bindsym XF86AudioLowerVolume exec bash ~/.config/i3/pactl_helper.bash --down
+    bindsym XF86AudioMute        exec bash ~/.config/i3/pactl_helper.bash --togmute
 
 #
 # System options
