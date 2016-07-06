@@ -212,12 +212,35 @@
 ################################################################################
 
 #
+# Define colors
+#
+
+    set $snow     #DDECEF
+    set $skyblue  #BFD9DA
+    set $rain     #87AAAE
+    set $sea      #65AA8C
+    set $blush    #BC4676
+    set $matte    #F6F6F6
+    set $grey1    #B8B9BB
+    set $grey3    #17181A
+
+#
 # Windowing options
 #
     # Remove title bars
-    new_window 1pixel
+    new_window pixel 1
     # Font for window titles.
-    font pango:DejaVu Sans Mono, Awesome 8
+    font pango:DejaVu Sans Mono, Awesome 9
+
+    # Window Colours
+    # class                 border   backgr.  text     indicator  child_border
+    client.focused          $sea     $sea     $grey3   $ice       $sea
+    client.focused_inactive $grey3   $grey3   $sea     $ice       $grey3
+    client.unfocused        $grey3   $grey3   $skyblue $ice       $grey3
+    client.urgent           $blush   $grey3   $blush   $ice       $blush
+    client.placeholder      $grey3   $grey3   $skyblue $ice       $grey3
+
+    client.background       $grey3
 
 #
 # Gaps and borders
@@ -236,7 +259,7 @@
 #
 
     bar {
-        font pango:DejaVu Sans Mono, Awesome 8
+        font pango:DejaVu Sans Mono, Awesome 9
 
         mode hide
         hidden_state hide
