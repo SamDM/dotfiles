@@ -38,6 +38,8 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'lervag/vimtex'
 Plug 'scrooloose/nerdtree'
 Plug 'tyrannicaltoucan/vim-deep-space'
+Plug 'scrooloose/nerdcommenter'
+Plug 'ctrlpvim/ctrlp.vim'
 
 "Plug 'chrisbra/Recover.vim'
 

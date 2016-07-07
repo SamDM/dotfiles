@@ -104,6 +104,12 @@ function volMuteStatus {
 
         curStatus=`pacmd list-sinks |grep -A 15 'index: '${active_sink}'' |awk '/muted/{ print $2}'`
 
+}
+
+function volMuteToggle {
+
+        volMuteStatus
+
         if [ ${curStatus} = 'yes' ]
         then
                 volMute unmute
@@ -113,6 +119,17 @@ function volMuteStatus {
 
 }
 
+function printVol {
+        getCurVol
+        volMuteStatus
+
+        if [ ${curStatus} = 'yes' ];
+        then
+                echo M
+        else
+                echo "${curVol}"
+        fi
+}
 
 case "$1" in
         --up)
@@ -122,7 +139,7 @@ case "$1" in
                 volDown
         ;;
         --togmute)
-                volMuteStatus
+                volMuteToggle
         ;;
         --mute)
                 volMute mute
@@ -132,5 +149,8 @@ case "$1" in
         ;;
         --sync)
                 volSync
+        ;;
+        --query_volume)
+                printVol
         ;;
 esac
