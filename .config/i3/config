@@ -40,8 +40,16 @@
     # Kill focused window
     bindsym $mod+Shift+q kill
 
-    # Start dmenu (a program launcher)
-    bindsym $mod+space exec dmenu_run
+    # Start dmenu/rofi (a program launcher)
+    bindsym $mod+space exec rofi -show run \
+        -regex \
+        -sidebar-mode \
+        -lines 5 \
+        -opacity 90 \
+        -bw 0 \
+        -separator-style none \
+        -fullscreen \
+        -padding 200
 
 #
 # Moving around:
@@ -224,6 +232,7 @@
     set $matte    #F6F6F6
     set $grey1    #B8B9BB
     set $grey3    #2F343F
+    set $grey4    #17181A
 
 #
 # Windowing options
@@ -278,7 +287,7 @@
             focused_workspace  $grey3   $grey3    $sea
             active_workspace   $grey3   $grey3    $skyblue
             inactive_workspace $grey3   $grey3    $skyblue
-            urgent_workspace   $blush   $blush    $grey3
-            binding_mode       $blush   $blush    $grey3
+            urgent_workspace   $blush   $blush    $grey4
+            binding_mode       $blush   $blush    $grey4
         }
     }
