@@ -276,11 +276,11 @@
 
     bar {
         font pango:DejaVu Sans Mono, Awesome 10
-
+        separator_symbol " "
         height 24
 
         #mode hide
-        modifier Mod4
+        #modifier Mod4
 
         #status_command i3blocks -c ~/.config/i3/i3blocks.conf
         status_command python ~/.config/i3/i3pystatus_conf.py
