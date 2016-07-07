@@ -223,7 +223,7 @@
     set $blush    #BC4676
     set $matte    #F6F6F6
     set $grey1    #B8B9BB
-    set $grey3    #17181A
+    set $grey3    #2F343F
 
 #
 # Windowing options
@@ -262,10 +262,9 @@
     bar {
         font pango:DejaVu Sans Mono, Awesome 9
 
-        # Auto-hide i3bar
-        mode           hide
-        hidden_state   hide
-        modifier       Mod4
+        height 16
+
+        modifier Mod4
 
         status_command i3blocks
 
