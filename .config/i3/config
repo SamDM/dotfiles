@@ -276,7 +276,7 @@
 
     bar {
         font pango:DejaVu Sans Mono, Awesome 10
-        separator_symbol " "
+        #separator_symbol " "
         height 24
 
         #mode hide
@@ -289,7 +289,7 @@
         colors {
             background $grey3
             statusline $skyblue
-            separator  $skyblue
+            separator  $grey3
 
             # class            #border  #backgr. #text
             focused_workspace  $grey3   $grey3    $sea

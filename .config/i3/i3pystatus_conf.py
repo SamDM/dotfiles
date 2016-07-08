@@ -5,14 +5,17 @@ status = Status()
 col_blush="#BC4676"
 col_sea  ="#65AA8C"
 
-# Displays clock like this:
-# Tue 30 Jul 11:59:46 PM KW31
-#                          ^-- calendar week
+# Displays clock and date
 status.register("clock",
     format="  %a %-d %b   %X",)
 
-# Shows the average load of the last minute and the last 5 minutes
-# (the default value for format is used)
+status.register("mem",
+        divisor=2**30,
+        alert_color=col_blush,
+        color="#FFFFFF",
+        format=" {used_mem}:{avail_mem}G")
+
+# Shows the average load of the last 1, 5 and 15 minutes
 status.register("load",
         critical_color=col_blush,
         format="  {avg1} {avg5} {avg15}",)
@@ -21,7 +24,7 @@ status.register("load",
 status.register("temp",
     format=" {temp:02.0f}°C",)
 
-# The battery monitor has many formatting options
+# The battery monitor
 status.register("battery",
     format="{status} {consumption:.2f}W [{percentage_design:.2f}%] {remaining:%E%hh:%Mm}",
     alert=False,
@@ -57,7 +60,7 @@ status.register("network",
 # Shows disk usage
 status.register("disk",
     path="/home",
-    format="  /home {avail}G",)
+    format="/home {avail}G",)
 status.register("disk",
     path="/",
     format="  / {avail}G",)

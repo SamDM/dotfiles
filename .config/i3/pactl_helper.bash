@@ -9,7 +9,7 @@
 # 'http://customlinux.blogspot.be/2013/02/pavolumesh-control-active-sink-volume.html'
 
 inc='5'
-capvol='yes'
+capvol='no'
 maxvol='150'
 tmpfile='/tmp/pasink.tmp'
 autosync='yes'
