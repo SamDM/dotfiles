@@ -8,10 +8,11 @@
 # scrot      -- for taking screenshots
 # ImageMagic -- for command line image manipulations
 
-scrot /tmp/screen.png
-convert /tmp/screen.png -scale 10% -scale 1000% /tmp/screen.png
-
+SCREENSHOT=$(mktemp --suffix .png)
 IMAGE=~/.config/i3/lock.png
+
+scrot $SCREENSHOT
+convert $SCREENSHOT -scale 10% -scale 1000% $SCREENSHOT
 
 if [[ -f $IMAGE ]]
 then
@@ -34,8 +35,8 @@ then
         PX=$(($SROX + $SRX/2 - $RX/2))
         PY=$(($SROY + $SRY/2 - $RY/2))
 
-        convert /tmp/screen.png $IMAGE -geometry +$PX+$PY -composite -matte  /tmp/screen.png
+        convert $SCREENSHOT $IMAGE -geometry +$PX+$PY -composite -matte  $SCREENSHOT
     done
 fi
 
-i3lock -e -d -I 30 -f -i /tmp/screen.png
+i3lock -e -d -I 30 -f -i $SCREENSHOT
