@@ -12,27 +12,37 @@ zstyle :compinstall filename '/home/sam/.zshrc'
 autoload -Uz compinit
 compinit
 
+#-------------------------------------------------------------------------------
+# Variable exports
+#-------------------------------------------------------------------------------
+
+# Since I do a tty login and then start i3 with startx, the `.zshrc` config
+# will be sourced first before any other such as `.xinitrc`, `.profile`, etc.
+# Therefore, this is the most 'global' place to export variables.
 export PATH=/home/sam/.local/bin:/home/sam/Executable:$PATH
+
+# For i3: make apps follow the qt5ct theme
+export QT_QPA_PLATFORMTHEME="qt5ct"
 
 # Enables colors and italics in neovim
 export NVIM_TUI_ENABLE_TRUE_COLOR=1
 export EDITOR=nvim
 
+# Required for color codes to work in prompt
+export TERM=st-256color
+
 #-------------------------------------------------------------------------------
 # Prompt
 #-------------------------------------------------------------------------------
 
-# Required for color codes to work in prompt
-#export TERM=screen-256color
-export TERM=st-256color
-
+# ```
 function zle-line-init zle-keymap-select {
     PRE=$'%F{15}%M-%n-%L%f %F{15}%30<...<%~%<<%f%F{236} ❖ %f%F{15}%w %T%f%F{7} %f%(?..%F{125}✘%?%f )%(1j.%F{215}::%j.%f)\n'
     MOD="${${KEYMAP/vicmd/%F{198\}⚡%f }/(main|viins)/%F{87\}⚡%f }"
     PS1=$PRE$MOD
     zle reset-prompt
-
 }
+# ```
 
 zle -N zle-line-init
 zle -N zle-keymap-select
@@ -65,6 +75,22 @@ bindkey '^x' push-input
 #-------------------------------------------------------------------------------
 # Aliases
 #-------------------------------------------------------------------------------
+
+# # In i3 the dolphin app has no icons because it wants to use the current
+# # desktop theme, and i3 has none. This tricks dolphin into thinking it runs in
+# # Gnome, so it nicely follows my gtk/lxappearnce settings. Don't forget to also
+# # modife the dolphin desktop file.
+# # To do so:
+# # ```
+# # mkdir ~/.local/share/applications
+# # cd ~/.local/share/applications
+# # cp /usr/share/applications/org.kde.dolphin.desktop .
+# # ```
+# # And change the `Exec` line to:
+# # ```
+# # Exec=XDG_CURRENT_DESKTOP=GNOME dolphin %u
+# # ```
+# alias dolphin='XDG_CURRENT_DESKTOP=GNOME dolphin'
 
 # Some common options
 alias ls='ls --color=auto'
