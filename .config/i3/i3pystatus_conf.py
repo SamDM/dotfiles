@@ -7,7 +7,8 @@ col_sea  ="#65AA8C"
 
 # Displays clock and date
 status.register("clock",
-    format="  %a %-d %b   %X",)
+        on_leftclick = "firefox https://calendar.google.com/calendar/render#main_7",
+        format="  %a %-d %b   %H:%M",)
 
 status.register("mem",
         divisor=2**30,
@@ -15,18 +16,18 @@ status.register("mem",
         color="#FFFFFF",
         format=" {used_mem}:{avail_mem}G")
 
-# Shows the average load of the last 1, 5 and 15 minutes
+# Shows the average load of the last 5 and 15 minutes
 status.register("load",
         critical_color=col_blush,
-        format="  {avg1} {avg5} {avg15}",)
+        format="{avg5} {avg15}",)
 
-# Shows your CPU temperature, if you have a Intel CPU
-status.register("temp",
-    format=" {temp:02.0f}°C",)
+status.register("cpu_usage",
+        # critical_color=col_blush,
+        format="  {usage:02d}%",)
 
 # The battery monitor
 status.register("battery",
-    format="{status} {consumption:.2f}W [{percentage_design:.2f}%] {remaining:%E%hh:%Mm}",
+    format="{status} {consumption:02.0f}W [{percentage_design:.0f}%] {remaining:%E%hh:%Mm}",
     alert=False,
     alert_percentage=20,
     critical_level_percentage=20,
@@ -71,7 +72,7 @@ status.register("disk",
 status.register("pulseaudio",
     color_muted=col_blush,
     vertical_bar_width=1,
-    format="{volume_bar} {volume}",)
+    format="{volume_bar} {volume}%",)
 
 # Shows mpd status
 status.register("mpd",
