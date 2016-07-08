@@ -175,13 +175,13 @@
     bindsym $mod+r mode "resize"
 
 #
-# Media
+# Volume
 #
 
-    set $mode_media Volume: j  | k  | m 
+    set $mode_volume Volume: j  | k  | m 
     # Reminder (R1): don't quote variables used as mode name, because it will
     # be quoted twice due to the line below.
-    mode "$mode_media" {
+    mode "$mode_volume" {
         # audio controls
         bindsym k exec bash ~/.config/i3/pactl_helper.bash --up
         bindsym j exec bash ~/.config/i3/pactl_helper.bash --down
@@ -192,12 +192,37 @@
         bindsym Escape mode "default"
     }
 
-    bindsym $mod+Control+m mode "$mode_media"
+    bindsym $mod+Control+v mode "$mode_volume"
 
     # audio control
     bindsym XF86AudioRaiseVolume exec bash ~/.config/i3/pactl_helper.bash --up
     bindsym XF86AudioLowerVolume exec bash ~/.config/i3/pactl_helper.bash --down
     bindsym XF86AudioMute        exec bash ~/.config/i3/pactl_helper.bash --togmute
+
+#
+# Media
+#
+
+    # Reminder: see (R1) above
+    set $mode_media Audio:  h  | s  | w  | i   — Video: l  | d  +  | t 
+    mode "$mode_media" {
+
+        # The idea here is that, if you want to change both video and audio,
+        # you first choose the video output(s), then the menu will stay and you
+        # can immediately choose the audio as well. If you only whish to change
+        # the audio output, which will probably happen more often, then you can
+        # directly choose the audio and the menu will dissapear immediatly
+        # after.
+        bindsym h exec bash ~/.config/i3/pa_sound_profiles.bash --headphones-sensible , mode "default"
+        bindsym s exec bash ~/.config/i3/pa_sound_profiles.bash --speakers-sensible   , mode "default"
+        bindsym w exec bash ~/.config/i3/pa_sound_profiles.bash --woofer-sensible     , mode "default"
+        bindsym i exec bash ~/.config/i3/pa_sound_profiles.bash --HDMI-sensible       , mode "default"
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+    }
+
+    bindsym $mod+Control+m mode "$mode_media"
 
 #
 # System options
