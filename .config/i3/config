@@ -6,8 +6,11 @@
 # Startup programs
 #
 
-    # set background
-    exec feh --bg-scale /run/media/sam/storage-parititon/Dropbox/4_Albums/Screensaver/Nature/alps-sky.jpg
+    # TODO: do something such that the pointer is on the active WS in dual
+    # monitor setup.
+
+    # setup screens and background
+    exec bash ~/.config/i3/screen_setup.sh --auto && ~/.fehbg
     # launch network manager
     exec --no-startup-id nm-applet
     # start dropbox
@@ -151,8 +154,6 @@
     bindsym $mod+Shift+c reload
     # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
     bindsym $mod+Shift+r restart
-    # exit i3 (logs you out of your X session)
-    bindsym $mod+Shift+Mod1+e exec "i3-msg exit"
 
     # resize window (you can also use the mouse for that)
     mode "resize" {
@@ -204,7 +205,7 @@
 #
 
     # Reminder: see (R1) above
-    set $mode_media Audio:  h  | s  | w  | i   — Video: l  | d  +  | t 
+    set $mode_media Audio preset: h  | s  | w  | i    — Sound card: L  | I    — Video: l  | d  +  | t 
     mode "$mode_media" {
 
         # The idea here is that, if you want to change both video and audio,
@@ -213,6 +214,13 @@
         # the audio output, which will probably happen more often, then you can
         # directly choose the audio and the menu will dissapear immediatly
         # after.
+        bindsym l exec bash ~/.config/i3/screen_setup.sh --laptop  && ~/.fehbg
+        bindsym d exec bash ~/.config/i3/screen_setup.sh --desk    && ~/.fehbg
+        bindsym t exec bash ~/.config/i3/screen_setup.sh --theatre && ~/.fehbg
+
+        bindsym Shift+l exec bash ~/.config/i3/pa_sound_profiles.bash --laptop , mode "default"
+        bindsym Shift+i exec bash ~/.config/i3/pa_sound_profiles.bash --HDMI   , mode "default"
+
         bindsym h exec bash ~/.config/i3/pa_sound_profiles.bash --headphones-sensible , mode "default"
         bindsym s exec bash ~/.config/i3/pa_sound_profiles.bash --speakers-sensible   , mode "default"
         bindsym w exec bash ~/.config/i3/pa_sound_profiles.bash --woofer-sensible     , mode "default"
@@ -244,6 +252,18 @@
     }
 
     bindsym $mod+Control+e mode "$mode_system"
+
+#
+# Rescue shortcuts (Mod+Alt+Shift+[cef])in case of X11 failure
+#
+
+    # contingency plan: press these keys to only use the laptop screen
+    bindsym $mod+Shift+Mod1+c exec bash ~/.config/i3/screen_setup.sh --laptop
+    # emergency plan: press these keys to stop i3 (logs out from X session)
+    bindsym $mod+Shift+Mod1+e exec i3-msg exit
+    # everything is fucked: reboot (probably won't work if the emergency plan
+    # already failed)
+    bindsym $mod+Shift+Mod1+f exec reboot
 
 ################################################################################
 # Appearance
@@ -301,14 +321,14 @@
 
     bar {
         font pango:DejaVu Sans Mono, Awesome 10
-        #separator_symbol " "
         height 24
 
-        #mode hide
-        #modifier Mod4
-
-        #status_command i3blocks -c ~/.config/i3/i3blocks.conf
         status_command python ~/.config/i3/i3pystatus_conf.py
+
+        # The first one will take priority
+        tray_output primary
+        tray_output HDMI1
+        tray_output LVSD1
 
         # Bar colors
         colors {
