@@ -76,7 +76,7 @@ status.register("pulseaudio",
 
 # Shows mpd status
 status.register("mpd",
-    format="{status} {title} {album}",
+    format="{status} {title} [— {album}/]",
     status={
         "pause": " ",
         "play":  " ",
