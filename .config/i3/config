@@ -10,11 +10,13 @@
     # monitor setup.
 
     # setup screens and background
-    exec bash ~/.config/i3/screen_setup.sh --auto && ~/.fehbg
+    exec --no-startup-id bash ~/.config/i3/screen_setup.sh --auto && ~/.fehbg
     # launch network manager
     exec --no-startup-id nm-applet
     # start dropbox
-    exec dropbox
+    exec --no-startup-id dropbox
+    # start music server
+    exec --no-startup-id mpd
 
 ################################################################################
 # Keybindings
@@ -123,6 +125,7 @@
 
     # programs with fixed workspace
     assign [class="Firefox"] $ws02
+    assign [class="cantata"] $ws10
 
 #
 # Layout stuff:
