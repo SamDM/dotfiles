@@ -42,7 +42,35 @@ fi
 revert() {
   xset dpms 0 0 0
 }
-trap revert SIGHUP SIGINT SIGTERM
-xset +dpms dpms 5 5 5
-i3lock -n -e -I 30 -f -i $SCREENSHOT
-revert
+
+disable_vol() {
+    ORIG_PROFILE=$(pactl list | grep 'Active Profile' | cut -d: -f2,3)
+    # by turning of the sound card, no settings (sinks/volume) are changed
+    pactl set-card-profile alsa_card.pci-0000_00_1b.0 off
+}
+
+restore_vol() {
+    # re-enable the previous profile
+    pactl set-card-profile alsa_card.pci-0000_00_1b.0 $ORIG_PROFILE
+}
+
+case "$1" in
+    dkms)
+        # for normal locking, enable dkms, and disable sound
+        disable_vol
+        trap revert SIGHUP SIGINT SIGTERM
+        xset +dpms dpms 5 5 5
+        i3lock -n -e -I 30 -f -i $SCREENSHOT
+        # if the password is entered correctly, i3 finishes and stops blocking
+        # this thread. Then disable dkms and restore volume to previous state
+        revert
+        restore_vol
+        ;;
+    fork)
+        # for suspend/hibernate, don't enable dkms and fork i3lock such that
+        # suspend/hibernate can take place
+        i3lock -e -I 30 -f -i $SCREENSHOT
+        ;;
+    *)
+        exit 1
+esac
