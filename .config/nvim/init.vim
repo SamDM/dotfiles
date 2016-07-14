@@ -4,11 +4,6 @@
 "    http://www.vimbits.com
 "    http://rayninfo.co.uk/vimtips.html
 "
-"
-" Most vim plugins are installed with pacman using the official arch
-" repositories and AUR, which is a better package manager than
-" pathogen/vundle/etc.
-"
 " I'm actually using neovim instead of vim, which is a drop-in vim replacement
 " with more advanced features such as:
 "    * Asynchronous plugins
@@ -30,8 +25,6 @@
 call plug#begin('~/.config/nvim/plugged')
 
 "Plug 'equalsraf/neovim-gui-shim'
-"Plug 'rust-lang/rust.vim'
-"Plug 'morhetz/gruvbox'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 "Plug 'jalvesaq/Nvim-R'
@@ -41,19 +34,12 @@ Plug 'tyrannicaltoucan/vim-deep-space'
 Plug 'scrooloose/nerdcommenter'
 Plug 'ctrlpvim/ctrlp.vim'
 
-"Plug 'chrisbra/Recover.vim'
-
 "Plug 'neovimhaskell/haskell-vim'
 "Plug 'bitc/vim-hdevtools'
 "Plug 'neomake/neomake'
 
 call plug#end()
 
-" Set font for GUI(s), DejaVu font with powerline patch works ok
-" Gvim reads this setting to choose a font
-set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 10
-" nvim-qt reads this variable to choose a font
-let g:Guifont='DejaVu Sans Mono for Powerline:h10'
 " Enable vim-airline.
 set laststatus=2
 set noshowmode

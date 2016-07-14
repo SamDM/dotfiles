@@ -72,11 +72,11 @@ status.register("disk",
 status.register("pulseaudio",
     color_muted=col_blush,
     vertical_bar_width=1,
-    format="{volume_bar} {volume}%",)
+    format="  {volume}%",)
 
 # Shows mpd status
 status.register("mpd",
-    format="{status} {title} [— {album}]",
+    format="[{status} {title} ][— {album}]",
     status={
         "pause": " ",
         "play":  " ",

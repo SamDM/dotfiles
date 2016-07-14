@@ -60,6 +60,7 @@
 #
 # Moving around:
 #
+
     # Move your focus around with $mod+[h|j|k|l], like vim
     bindsym $mod+h focus left
     bindsym $mod+j focus down
@@ -81,17 +82,23 @@
     bindsym $mod+Shift+Down  move down
     bindsym $mod+Shift+Up    move up
     bindsym $mod+Shift+Right move right
+
+    # $mod+m and $mod+Shift+m to set and use marks
+    bindsym $mod+m exec i3-input -F 'mark %s' -P 'Mark name: '
+    bindsym $mod+Shift+m exec i3-input -F '[con_mark=%s] focus' -P 'Go to mark: '
+
 #
 # Workspaces:
 #
 
+    # workspace names/labels
     set $ws01 "1 "
     set $ws02 "2 "
     set $ws03 "3 "
     set $ws04 "4"
     set $ws05 "5"
     set $ws06 "6"
-    set $ws07 "7"
+    set $ws07 "7 "
     set $ws08 "8"
     set $ws09 "9"
     set $ws10 "10 "
@@ -122,6 +129,11 @@
     # move workspace to other monitor
     bindsym $mod+u move workspace to output left
     bindsym $mod+i move workspace to output right
+
+    # press $mod+n twice to move back and forth
+    workspace_auto_back_and_forth yes
+    # move to previous workspace
+    bindsym $mod+z workspace back_and_forth
 
     # programs with fixed workspace
     assign [class="Firefox"] $ws02
@@ -189,7 +201,7 @@
         # audio controls
         bindsym k exec bash ~/.config/i3/pactl_helper.bash --up
         bindsym j exec bash ~/.config/i3/pactl_helper.bash --down
-        bindsym m exec bash ~/.config/i3/pactl_helper.bash --togmute
+        bindsym m exec bash ~/.config/i3/pactl_helper.bash --togmute, mode "default"
 
         # back to normal: Enter or Escape
         bindsym Return mode "default"
