@@ -46,8 +46,8 @@ status.register("network",
     start_color=col_sea,
     end_color=col_blush,
     color_down=col_blush,
-    format_up="  {bytes_recv:04d} {bytes_sent:04d}",
-    format_down="  {bytes_recv:04d} {bytes_sent:04d}")
+    format_up="  {bytes_recv:04d} {bytes_sent:02d}",
+    format_down="  {bytes_recv:04d} {bytes_sent:02d}")
 
 # Note: requires both netifaces and basiciw (for essid and quality)
 status.register("network",
@@ -55,16 +55,16 @@ status.register("network",
     start_color=col_sea,
     end_color=col_blush,
     color_down=col_blush,
-    format_up="  {bytes_recv:04d} {bytes_sent:04d}",
-    format_down="  {bytes_recv:04d} {bytes_sent:04d}")
+    format_up="  {bytes_recv:04d} {bytes_sent:02d}",
+    format_down="  {bytes_recv:04d} {bytes_sent:02d}")
 
 # Shows disk usage
 status.register("disk",
     path="/home",
-    format="/home {avail}G",)
+    format="/{avail}G",)
 status.register("disk",
     path="/",
-    format="  / {avail}G",)
+    format="/{avail}G",)
 
 # Shows pulseaudio default sink volume
 #
@@ -76,7 +76,10 @@ status.register("pulseaudio",
 
 # Shows mpd status
 status.register("mpd",
-    format="[{status} {title} ][— {album}]",
+    format="[{artist} ][{status} {title}]",
+    on_leftclick="previous_song",
+    on_rightclick="next_song",
+    on_doubleleftclick="switch_playpause",
     status={
         "pause": " ",
         "play":  " ",

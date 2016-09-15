@@ -95,7 +95,7 @@
     set $ws01 "1 "
     set $ws02 "2 "
     set $ws03 "3 "
-    set $ws04 "4"
+    set $ws04 "4 "
     set $ws05 "5"
     set $ws06 "6"
     set $ws07 "7 "
@@ -138,6 +138,10 @@
     # programs with fixed workspace
     assign [class="Firefox"] $ws02
     assign [class="cantata"] $ws10
+    assign [class="mendeleydesktop.x86_64"] $ws06
+    assign [class="Mendeleydesktop.x86_64"] $ws06
+
+    #for_window [class="VirtualBox"] floating enable
 
 #
 # Layout stuff:

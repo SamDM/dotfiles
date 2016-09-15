@@ -24,15 +24,20 @@
 
 call plug#begin('~/.config/nvim/plugged')
 
-"Plug 'equalsraf/neovim-gui-shim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-"Plug 'jalvesaq/Nvim-R'
 Plug 'lervag/vimtex'
 Plug 'scrooloose/nerdtree'
 Plug 'tyrannicaltoucan/vim-deep-space'
 Plug 'scrooloose/nerdcommenter'
 Plug 'ctrlpvim/ctrlp.vim'
+Plug 'junegunn/vim-easy-align'
+Plug 'pbrisbin/vim-syntax-shakespeare'
+
+" Good plugins currently not installed:
+"Plug 'equalsraf/neovim-gui-shim'
+
+"Plug 'jalvesaq/Nvim-R'
 
 "Plug 'neovimhaskell/haskell-vim'
 "Plug 'bitc/vim-hdevtools'
@@ -131,29 +136,36 @@ vnoremap <c-c> "+y
 " Easy buffer navigation
 map <leader>b <esc>:bnext<CR>
 map <leader>B <esc>:bpervious<CR>
+" Easy tab navigation
+map <A-t> :tabNext<CR>
 
 " Easily save stuff with Ctrl-s
 map <C-s> :w<CR>
 imap <C-s> <esc>:w<CR>
 
-if has('nvim')
-    " escape terminal mode
-    tnoremap <A-q> <C-\><C-n>
-    " Seamless navigation between terminal and other windows
-    tnoremap <A-h> <C-\><C-n><C-w>h
-    tnoremap <A-j> <C-\><C-n><C-w>j
-    tnoremap <A-k> <C-\><C-n><C-w>k
-    tnoremap <A-l> <C-\><C-n><C-w>l
-    nnoremap <A-h> <C-w>h
-    nnoremap <A-j> <C-w>j
-    nnoremap <A-k> <C-w>k
-    nnoremap <A-l> <C-w>l
-    " quickly split a terminal window
-    map <leader>tj <esc>:split<CR><C-w>j:terminal<CR>
-    map <leader>tk <esc>:split<CR><C-w>k:terminal<CR>
-    map <leader>th <esc>:vsplit<CR><C-w>h:terminal<CR>
-    map <leader>tl <esc>:vsplit<CR><C-w>l:terminal<CR>
-endif
+" escape terminal mode
+tnoremap <A-q> <C-\><C-n>
+" Seamless navigation between terminal and other windows
+tnoremap <A-h> <C-\><C-n><C-w>h
+tnoremap <A-j> <C-\><C-n><C-w>j
+tnoremap <A-k> <C-\><C-n><C-w>k
+tnoremap <A-l> <C-\><C-n><C-w>l
+nnoremap <A-h> <C-w>h
+nnoremap <A-j> <C-w>j
+nnoremap <A-k> <C-w>k
+nnoremap <A-l> <C-w>l
+" quickly split a terminal window
+map <leader>tj <esc>:split<CR><C-w>j:terminal<CR>
+map <leader>tk <esc>:split<CR><C-w>k:terminal<CR>
+map <leader>th <esc>:vsplit<CR><C-w>h:terminal<CR>
+map <leader>tl <esc>:vsplit<CR><C-w>l:terminal<CR>
+" switch from terminal to previous buffer
+tnoremap <A-b> <C-\><C-n>:bprevious<CR>
+
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
 
 "-------------------------------------------------------------------------------
 " Syntastic
