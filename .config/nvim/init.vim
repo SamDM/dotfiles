@@ -138,6 +138,7 @@ map <leader>b <esc>:bnext<CR>
 map <leader>B <esc>:bpervious<CR>
 " Easy tab navigation
 map <A-t> :tabNext<CR>
+tnoremap <A-t> <C-\><C-n>:tabNext<CR>
 
 " Easily save stuff with Ctrl-s
 map <C-s> :w<CR>

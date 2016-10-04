@@ -38,7 +38,7 @@ export TERM=st-256color
 # ```
 function zle-line-init zle-keymap-select {
     PRE=$'%F{15}%M-%n-%L%f %F{15}%30<...<%~%<<%f%F{236} ❖ %f%F{15}%w %T%f%F{7} %f%(?..%F{125}✘%?%f )%(1j.%F{215}::%j.%f)\n'
-    MOD="${${KEYMAP/vicmd/%F{198\}⚡%f }/(main|viins)/%F{87\}⚡%f }"
+    MOD="${${KEYMAP/vicmd/%F{198\}o%f }/(main|viins)/%F{87\}o%f }"
     PS1=$PRE$MOD
     zle reset-prompt
 }
