@@ -24,31 +24,30 @@
 
 call plug#begin('~/.config/nvim/plugged')
 
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+Plug 'chrisbra/csv.vim'
+Plug 'chrisbra/unicode.vim'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'd11wtq/ctrlp_bdelete.vim'
+Plug 'jalvesaq/Nvim-R'
+Plug 'junegunn/vim-easy-align'
 Plug 'lervag/vimtex'
+Plug 'neomake/neomake'
+Plug 'pbrisbin/vim-syntax-shakespeare'
+Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'tyrannicaltoucan/vim-deep-space'
-Plug 'scrooloose/nerdcommenter'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'junegunn/vim-easy-align'
-Plug 'pbrisbin/vim-syntax-shakespeare'
-
-" Good plugins currently not installed:
-"Plug 'equalsraf/neovim-gui-shim'
-
-"Plug 'jalvesaq/Nvim-R'
-
-"Plug 'neovimhaskell/haskell-vim'
-"Plug 'bitc/vim-hdevtools'
-"Plug 'neomake/neomake'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+Plug 'qpkorr/vim-bufkill'
 
 call plug#end()
 
 " Enable vim-airline.
 set laststatus=2
 set noshowmode
-let g:airline_powerline_fonts = 1
+let g:airline_powerline_fonts=1
 let g:airline_detect_modified=1 " enable modified detection
 let g:airline_detect_paste=1    " enable paste detection
 let g:airline_detect_iminsert=0 " enable iminsert detection
@@ -131,7 +130,7 @@ map <leader>s <esc>:set invlist<cr>:echo "whitespaces toggle"<cr>
 nnoremap <F2> :set invpaste paste?<CR>
 set pastetoggle=<F2>
 " Copy visual selection with Ctrl-C
-vnoremap <c-c> "+y
+vnoremap <C-c> "+y
 
 " Easy buffer navigation
 map <leader>b <esc>:bnext<CR>
@@ -167,6 +166,12 @@ tnoremap <A-b> <C-\><C-n>:bprevious<CR>
 xmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
+
+"-------------------------------------------------------------------------------
+" Git gutter
+"-------------------------------------------------------------------------------
+
+set updatetime=250
 
 "-------------------------------------------------------------------------------
 " Syntastic
@@ -206,25 +211,12 @@ let g:ctrlp_custom_ignore = {
 " control. It also supports works with .svn, .hg, .bzr.
 let g:ctrlp_working_path_mode = 'r'
 
+call ctrlp_bdelete#init()
+
 " Easy bindings for its various modes
 nmap <leader>bb :CtrlPBuffer<cr>
 nmap <leader>bm :CtrlPMixed<cr>
 nmap <leader>bs :CtrlPMRU<cr>
-
-"-------------------------------------------------------------------------------
-" Hard mode
-"-------------------------------------------------------------------------------
-
-" Get rid of bad pracktices
-"autocmd VimEnter,BufNewFile,BufReadPost * silent! call HardMode()
-"nnoremap <leader>w <Esc>:call ToggleHardMode()<CR>
-
-"-------------------------------------------------------------------------------
-" YouCompleteMe
-"-------------------------------------------------------------------------------
-
-nnoremap <leader>g :YcmCompleter GoTo<CR>
-let g:ycm_confirm_extra_conf = 0
 
 "-------------------------------------------------------------------------------
 " UltiSnip
@@ -238,14 +230,6 @@ let g:UltiSnipsEditSplit="vertical"
 map <leader>us <esc>:call UltiSnips#ListSnippets()<CR>
 
 "-------------------------------------------------------------------------------
-" for Rust & Rust vim
-"-------------------------------------------------------------------------------
-
-let g:rustfmt_autosave = 0
-let g:ycm_rust_src_path = "/home/sam/Local/Rust-source/rust/src"
-autocmd FileType rust map <leader>r :RustRun
-
-"-------------------------------------------------------------------------------
 " for LaTeX
 "-------------------------------------------------------------------------------
 
@@ -257,29 +241,8 @@ autocmd FileType tex map <leader>tc <esc>:split<CR><C-w>j:terminal<CR>latexmk -c
 autocmd FileType tex map <leader>to <esc>:!xdg-open /tmp/scratch.pdf<CR>
 
 "-------------------------------------------------------------------------------
-" for Cpp
-"-------------------------------------------------------------------------------
-
-autocmd FileType cpp vmap <leader>rf :!clang-format<CR>
-
-"-------------------------------------------------------------------------------
-" for perl
-"-------------------------------------------------------------------------------
-
-let perl_fold=1
-" let sh_fold_enabled=1
-let perl_extended_vars=1
-" let perl_sync_dist=250
-let g:syntastic_enable_perl_checker = 1
-let g:syntastic_perl_checkers = ['perl', 'podchecker']
-"let g:Perl_MapLeader  = '|'
-autocmd FileType perl map <leader>rr <esc>:!perl -w %<enter>
-autocmd FileType perl map <leader>rd <esc>:!perl -d %<enter>
-
-"-------------------------------------------------------------------------------
 " for Haskell
 "-------------------------------------------------------------------------------
 
-au FileType haskell nnoremap <buffer> <F1> :HdevtoolsType<CR>
-au FileType haskell nnoremap <buffer> <silent> <F2> :HdevtoolsClear<CR>
-let g:syntastic_haskell_checkers = ['hlint', 'scan']
+digraph ZZ 8484
+let g:neomake_stack_maker = { 'exe': 'stack', 'args': ['build'] }

@@ -1,6 +1,7 @@
 [alias]
   st   = status
   hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+  graph = log --graph --all --pretty=format:\"%C(yellow)%h%Creset%C(cyan)%C(bold)%d%Creset %C(cyan)%cr%Creset %C(green)%cN%Creset %+s\"
 [user]
-	email = sam.demeyer93@gmail.com
-	name = Sam De Meyer
+  email = sam.demeyer93@gmail.com
+  name = Sam De Meyer

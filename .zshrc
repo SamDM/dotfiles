@@ -19,7 +19,7 @@ compinit
 # Since I do a tty login and then start i3 with startx, the `.zshrc` config
 # will be sourced first before any other such as `.xinitrc`, `.profile`, etc.
 # Therefore, this is the most 'global' place to export variables.
-export PATH=/home/sam/.local/bin:/home/sam/Executable:$PATH
+export PATH=/home/sam/.local/bin:/home/sam/Executable:/home/sam/anaconda3/bin:$PATH
 
 # For i3: make apps follow the qt5ct theme
 export QT_QPA_PLATFORMTHEME="qt5ct"
@@ -35,10 +35,16 @@ export TERM=st-256color
 # Prompt
 #-------------------------------------------------------------------------------
 
+function conda_env {
+    if [[ -n $CONDA_DEFAULT_ENV ]]; then
+        echo '%F{34}`-._.-'"''"'-:>%f%F{160}~%f '"$CONDA_DEFAULT_ENV "
+    fi
+}
+
 # ```
 function zle-line-init zle-keymap-select {
     PRE=$'%F{15}%M-%n-%L%f %F{15}%30<...<%~%<<%f%F{236} ❖ %f%F{15}%w %T%f%F{7} %f%(?..%F{125}✘%?%f )%(1j.%F{215}::%j.%f)\n'
-    MOD="${${KEYMAP/vicmd/%F{198\}o%f }/(main|viins)/%F{87\}o%f }"
+    MOD="$(conda_env)${${KEYMAP/vicmd/%F{198\}o%f }/(main|viins)/%F{87\}o%f }"
     PS1=$PRE$MOD
     zle reset-prompt
 }
@@ -140,3 +146,11 @@ function terminaltest {
   echo -e "\e[4munderline\e[0m"
   echo -e "\e[9mstrikethrough\e[0m"
 }
+
+#-------------------------------------------------------------------------------
+# Tab completion for conda
+#-------------------------------------------------------------------------------
+
+# see https://github.com/esc/conda-zsh-completion
+fpath+=/home/sam/Local/conda-zsh-completion
+compinit conda
