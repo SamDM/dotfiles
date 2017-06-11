@@ -83,9 +83,9 @@ set undofile
 set undolevels=100 "maximum number of changes that can be undone
 set undoreload=100 "maximum number lines to save for undo on a buffer reload
 
-" Switch syntax highlighting on, when the terminal has colors. Also switch on
-" highlighting the last used search pattern.
-set t_Co=256
+" Switch syntax highlighting on, when the terminal has colors.
+set termguicolors
+" Switch on highlighting the last used search pattern.
 set hlsearch
 
 colorscheme deep-space

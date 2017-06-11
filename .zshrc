@@ -19,17 +19,12 @@ compinit
 # Since I do a tty login and then start i3 with startx, the `.zshrc` config
 # will be sourced first before any other such as `.xinitrc`, `.profile`, etc.
 # Therefore, this is the most 'global' place to export variables.
-export PATH=/home/sam/.local/bin:/home/sam/Executable:/home/sam/anaconda3/bin:$PATH
+export PATH=/home/sam/.local/bin:$PATH
 
-# For i3: make apps follow the qt5ct theme
-export QT_QPA_PLATFORMTHEME="qt5ct"
-
-# Enables colors and italics in neovim
-export NVIM_TUI_ENABLE_TRUE_COLOR=1
 export EDITOR=nvim
 
 # Required for color codes to work in prompt
-export TERM=st-256color
+#export TERM=st-256color
 
 #-------------------------------------------------------------------------------
 # Prompt
@@ -148,9 +143,7 @@ function terminaltest {
 }
 
 #-------------------------------------------------------------------------------
-# Tab completion for conda
+# Nix
 #-------------------------------------------------------------------------------
 
-# see https://github.com/esc/conda-zsh-completion
-fpath+=/home/sam/Local/conda-zsh-completion
-compinit conda
+source ~/.nix-profile/etc/profile.d/nix.sh
