@@ -16,15 +16,9 @@ compinit
 # Variable exports
 #-------------------------------------------------------------------------------
 
-# Since I do a tty login and then start i3 with startx, the `.zshrc` config
-# will be sourced first before any other such as `.xinitrc`, `.profile`, etc.
-# Therefore, this is the most 'global' place to export variables.
 export PATH=/home/sam/.local/bin:$PATH
 
 export EDITOR=nvim
-
-# Required for color codes to work in prompt
-#export TERM=st-256color
 
 #-------------------------------------------------------------------------------
 # Prompt
@@ -104,8 +98,6 @@ alias perlconsole='perl -de 0'
 alias clearpackcache='sudo paccache -r && sudo paccache -ruk0'
 alias listvimplugins='pacman -Qs vim-plugins | grep vim-plugins | cut -d/ -f2 | sed "s/ (.*)//g"'
 
-# Start apache server
-alias startapache='sudo systemctl start httpd'
 # Start mysql server
 alias startmysql='sudo systemctl start mysqld.service'
 # List all files tracked by git
@@ -146,4 +138,6 @@ function terminaltest {
 # Nix
 #-------------------------------------------------------------------------------
 
-source ~/.nix-profile/etc/profile.d/nix.sh
+if [ -e /home/sam/.nix-profile/etc/profile.d/nix.sh ]; then
+    . /home/sam/.nix-profile/etc/profile.d/nix.sh
+fi
