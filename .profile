@@ -1,9 +1,10 @@
-# If there is anything that sources the `.xprofile` file the code here will log what
-# it was.
 #
-# i3 does not seem to source this file
-LOG=$(mktemp -t .profile_LOG.XXXXXXXXXX)
-echo "-----" >>$LOG
-echo "Caller: $0" >>$LOG
-echo "DESKTOP_SESSION: $DESKTOP_SESSION" >>$LOG
-echo "GDMSESSION: $GDMSESSION" >>$LOG
+# ~/.profile
+#
+#
+
+[[ "$XDG_CURRENT_DESKTOP" == "KDE" ]] || export QT_QPA_PLATFORMTHEME="qt5ct"
+export EDITOR=/usr/bin/nvim
+export TERM=xterm
+
+[[ -f ~/.extend.profile ]] && . ~/.extend.profile
