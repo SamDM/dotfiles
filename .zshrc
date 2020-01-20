@@ -5,10 +5,18 @@
 HISTFILE=~/.histfile
 HISTSIZE=10000
 SAVEHIST=10000
-setopt share_history # already does 'setopt inc_append_history'
+# already does 'setopt inc_append_history'
+setopt share_history
+
+# suggests corrections to incorrectly typed commands
 setopt correct
+# allows bash-style comments in interactive shell
+setopt interactivecomments
+
+# use vi mode
 bindkey -v
-zstyle :compinstall filename '/home/sam/.zshrc'
+
+# start zsh completion engine
 autoload -Uz compinit
 compinit
 
@@ -16,8 +24,12 @@ compinit
 # Variable exports
 #-------------------------------------------------------------------------------
 
-export PATH=/home/sam/.local/bin:$PATH
+# Since I do a tty login and then start i3 with startx, the `.zshrc` config
+# will be sourced first before any other such as `.xinitrc`, `.profile`, etc.
+# Therefore, this is the most 'global' place to export variables.
+export PATH=~/.local/bin:$PATH
 
+# Enables colors and italics in neovim
 export EDITOR=nvim
 
 #-------------------------------------------------------------------------------
@@ -26,14 +38,13 @@ export EDITOR=nvim
 
 function conda_env {
     if [[ -n $CONDA_DEFAULT_ENV ]]; then
-        echo '%F{34}`-._.-'"''"'-:>%f%F{160}~%f '"$CONDA_DEFAULT_ENV "
+        echo ' %F{34}`-._.-'"''"'-:>%f%F{160}~%f '"$CONDA_DEFAULT_ENV "
     fi
 }
 
-# ```
 function zle-line-init zle-keymap-select {
-    PRE=$'%F{15}%M-%n-%L%f %F{15}%30<...<%~%<<%f%F{236} ❖ %f%F{15}%w %T%f%F{7} %f%(?..%F{125}✘%?%f )%(1j.%F{215}::%j.%f)\n'
-    MOD="$(conda_env)${${KEYMAP/vicmd/%F{198\}o%f }/(main|viins)/%F{87\}o%f }"
+    PRE=$'%F{159}╭%n@%M:%L %30<...<%~%<<% %f %F{223}❖%f %F{159}%w %T%f %(?..%F{125}✘%?%f )%(1j.%F{215}::%j.%f)\n'
+    MOD="%F{159}╰%f$(conda_env)${${KEYMAP/vicmd/%F{198\}X%f }/(main|viins)/%F{223\}$%f }"
     PS1=$PRE$MOD
     zle reset-prompt
 }
@@ -71,22 +82,6 @@ bindkey '^x' push-input
 # Aliases
 #-------------------------------------------------------------------------------
 
-# # In i3 the dolphin app has no icons because it wants to use the current
-# # desktop theme, and i3 has none. This tricks dolphin into thinking it runs in
-# # Gnome, so it nicely follows my gtk/lxappearnce settings. Don't forget to also
-# # modife the dolphin desktop file.
-# # To do so:
-# # ```
-# # mkdir ~/.local/share/applications
-# # cd ~/.local/share/applications
-# # cp /usr/share/applications/org.kde.dolphin.desktop .
-# # ```
-# # And change the `Exec` line to:
-# # ```
-# # Exec=XDG_CURRENT_DESKTOP=GNOME dolphin %u
-# # ```
-# alias dolphin='XDG_CURRENT_DESKTOP=GNOME dolphin'
-
 # Some common options
 alias ls='ls --color=auto'
 alias ll='ls -lah --color=auto'
@@ -98,20 +93,11 @@ alias perlconsole='perl -de 0'
 alias clearpackcache='sudo paccache -r && sudo paccache -ruk0'
 alias listvimplugins='pacman -Qs vim-plugins | grep vim-plugins | cut -d/ -f2 | sed "s/ (.*)//g"'
 
-# Start mysql server
-alias startmysql='sudo systemctl start mysqld.service'
-# List all files tracked by git
-alias gittracked='git ls-tree -r master --name-only'
-
 # Use vim as a pager
 alias vip='nvim -R -'
 # Easily launch a desktop app as a child process of the ?? thread from within
 # the terminal
 alias opn='xdg-open'
-
-# Turn pc into WiFi hotspot
-alias hotspot-whoson='create_ap --list-clients $(create_ap --list-running | tail -n1 | awk "{print $1}")'
-alias hotspot-running='create_ap --list-running'
 
 # Test if terminal is truecolor or not
 function terminaltest {
@@ -134,10 +120,3 @@ function terminaltest {
   echo -e "\e[9mstrikethrough\e[0m"
 }
 
-#-------------------------------------------------------------------------------
-# Nix
-#-------------------------------------------------------------------------------
-
-if [ -e /home/sam/.nix-profile/etc/profile.d/nix.sh ]; then
-    . /home/sam/.nix-profile/etc/profile.d/nix.sh
-fi

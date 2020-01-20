@@ -27,35 +27,17 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'chrisbra/csv.vim'
 Plug 'chrisbra/unicode.vim'
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'd11wtq/ctrlp_bdelete.vim'
 Plug 'jalvesaq/Nvim-R'
-Plug 'junegunn/vim-easy-align'
-Plug 'lervag/vimtex'
-Plug 'neomake/neomake'
-Plug 'pbrisbin/vim-syntax-shakespeare'
-Plug 'scrooloose/nerdcommenter'
-Plug 'scrooloose/nerdtree'
 Plug 'tyrannicaltoucan/vim-deep-space'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'
+Plug 'junegunn/vim-easy-align'
 Plug 'qpkorr/vim-bufkill'
 
 call plug#end()
 
-" Enable vim-airline.
-set laststatus=2
-set noshowmode
-let g:airline_powerline_fonts=1
-let g:airline_detect_modified=1 " enable modified detection
-let g:airline_detect_paste=1    " enable paste detection
-let g:airline_detect_iminsert=0 " enable iminsert detection
-let g:airline_theme="tomorrow"
-
 " some sane defaults
 syntax on
 set ruler
+set nowrap
 set showcmd
 set splitright
 set number
@@ -67,7 +49,6 @@ set relativenumber
 filetype on
 filetype plugin on
 filetype indent on
-highlight ColorColumn ctermbg=red
 
 " allow for project vimrc overrides
 set exrc
@@ -83,18 +64,11 @@ set undofile
 set undolevels=100 "maximum number of changes that can be undone
 set undoreload=100 "maximum number lines to save for undo on a buffer reload
 
-" Switch syntax highlighting on, when the terminal has colors.
-set termguicolors
 " Switch on highlighting the last used search pattern.
 set hlsearch
 
-colorscheme deep-space
 " Higlight 81th column (must come after theme loading to override theme color)
 match ColorColumn '\%81v'
-
-" Go to last line I edited before closing and center it
-au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") |
-            \ exe "normal! g'\"zz" | endif
 
 "-------------------------------------------------------------------------------
 " general mappings
@@ -113,7 +87,7 @@ let maplocalleader = ";"
 " Press jj to exit insert mode, you'll never have to actually type jj in code
 imap jj <esc>
 
-" Turn of last search highlight
+" Turn off last search highlight
 map <leader>h <esc>:noh<cr>:echo "cleared search highlight"<cr>
 
 " Pres <space> to repeat macro in q register, super handy
@@ -121,14 +95,9 @@ nnoremap <Space> @q
 
 " Show whitespaces
 set listchars=eol:∟,tab:▷\ ,trail:◦,extends:⋗,precedes:⋖
-" highlight whitespace_chars ctermfg=Black guifg=Black
-" call matchadd('whitespace_chars', '\s\+$', 100) " matchadd = laggy
-" call matchadd('whitespace_chars', '\t\+', 100)
+" highlight whitespace_chars
 map <leader>s <esc>:set invlist<cr>:echo "whitespaces toggle"<cr>
 
-" Pasting options, handy in console vim
-nnoremap <F2> :set invpaste paste?<CR>
-set pastetoggle=<F2>
 " Copy visual selection with Ctrl-C
 vnoremap <C-c> "+y
 
@@ -143,17 +112,17 @@ tnoremap <A-t> <C-\><C-n>:tabNext<CR>
 map <C-s> :w<CR>
 imap <C-s> <esc>:w<CR>
 
-" escape terminal mode
-tnoremap <A-q> <C-\><C-n>
 " Seamless navigation between terminal and other windows
-tnoremap <A-h> <C-\><C-n><C-w>h
-tnoremap <A-j> <C-\><C-n><C-w>j
-tnoremap <A-k> <C-\><C-n><C-w>k
-tnoremap <A-l> <C-\><C-n><C-w>l
 nnoremap <A-h> <C-w>h
 nnoremap <A-j> <C-w>j
 nnoremap <A-k> <C-w>k
 nnoremap <A-l> <C-w>l
+tnoremap <A-h> <C-\><C-n><C-w>h
+tnoremap <A-j> <C-\><C-n><C-w>j
+tnoremap <A-k> <C-\><C-n><C-w>k
+tnoremap <A-l> <C-\><C-n><C-w>l
+" escape terminal mode
+tnoremap <A-q> <C-\><C-n>
 " quickly split a terminal window
 map <leader>tj <esc>:split<CR><C-w>j:terminal<CR>
 map <leader>tk <esc>:split<CR><C-w>k:terminal<CR>
@@ -161,88 +130,31 @@ map <leader>th <esc>:vsplit<CR><C-w>h:terminal<CR>
 map <leader>tl <esc>:vsplit<CR><C-w>l:terminal<CR>
 " switch from terminal to previous buffer
 tnoremap <A-b> <C-\><C-n>:bprevious<CR>
+tnoremap <A-w> <C-\><C-n><C-w>p
+nnoremap <A-w> <C-w>p
+
+" EasyAlign
+"------------------------------------------------------------------------------
 
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
 
-"-------------------------------------------------------------------------------
-" Git gutter
-"-------------------------------------------------------------------------------
-
-set updatetime=250
-
-"-------------------------------------------------------------------------------
-" Syntastic
-"-------------------------------------------------------------------------------
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_error_symbol = '✘'
-let g:syntastic_warning_symbol = '➤'
-
-"-------------------------------------------------------------------------------
-" NERDtree
-"-------------------------------------------------------------------------------
-
-map <leader>nn <esc>:NERDTreeToggle<CR>
-map <leader>nt <esc>:NERDTree<CR>
-let g:NERDTreeShowBookmarks=1
-
-"-------------------------------------------------------------------------------
 " CtrlP
-"-------------------------------------------------------------------------------
+"------------------------------------------------------------------------------
 
-" CtrlP plugin mappings
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_follow_symlinks=1
 " setup some default ignores
 let g:ctrlp_custom_ignore = {
             \ 'dir':  '\v[\/](\.(git|hg|svn)|\_site)$',
             \ 'file': '\v\.(exe|so|dll|class|png|jpg|jpeg)$',
             \}
-
 " Use the nearest .git directory as the cwd
 " This makes a lot of sense if you are working on a project that is in version
 " control. It also supports works with .svn, .hg, .bzr.
 let g:ctrlp_working_path_mode = 'r'
-
-call ctrlp_bdelete#init()
-
-" Easy bindings for its various modes
+" Easy bindings for various modes
 nmap <leader>bb :CtrlPBuffer<cr>
 nmap <leader>bm :CtrlPMixed<cr>
 nmap <leader>bs :CtrlPMRU<cr>
-
-"-------------------------------------------------------------------------------
-" UltiSnip
-"-------------------------------------------------------------------------------
-
-" UltiSnip plugin mappings
-let g:UltiSnipsExpandTrigger="<C-j>"
-let g:UltiSnipsJumpForwardTrigger="<C-j>"
-let g:UltiSnipsJumpBackwardTrigger="<C-A-j>"
-let g:UltiSnipsEditSplit="vertical"
-map <leader>us <esc>:call UltiSnips#ListSnippets()<CR>
-
-"-------------------------------------------------------------------------------
-" for LaTeX
-"-------------------------------------------------------------------------------
-
-set grepprg=grep\ -nH\ $*
-let g:tex_flavor = "latex"
-let g:syntastic_tex_checkers = []
-autocmd FileType tex map <leader>ts <esc>:tabnew<CR>:e /tmp/scratch.tex<CR>
-autocmd FileType tex map <leader>tc <esc>:split<CR><C-w>j:terminal<CR>latexmk -cd -pvc -halt-on-error -pdf /tmp/scratch.tex<CR>
-autocmd FileType tex map <leader>to <esc>:!xdg-open /tmp/scratch.pdf<CR>
-
-"-------------------------------------------------------------------------------
-" for Haskell
-"-------------------------------------------------------------------------------
-
-digraph ZZ 8484
-let g:neomake_stack_maker = { 'exe': 'stack', 'args': ['build'] }
