@@ -1,0 +1,26 @@
+// Adjustments below make the file tree a bit more space efficient.
+
+// distance between file/folder icon and the file/folder name
+.icon:before {
+    width: 8px;
+}
+
+// indentation width of folders for each depth level in the file tree
+.list-tree.has-collapsable-children .list-nested-item > .list-tree > li, .list-tree.has-collapsable-children .list-nested-item > .list-group > li {
+    padding-left: 12px;
+}
+
+// indentation width of file for each depth level in the file tree
+.list-tree.has-collapsable-children li.list-item {
+    margin-left: 16px;
+}
+
+// distance between uncollapse arrow and folder icon
+.list-tree.has-collapsable-children .list-nested-item > .list-item::before {
+    width: 0px;
+}
+
+// distance between collapse arrow and folder icon
+.list-tree.has-collapsable-children .list-nested-item.collapsed > .list-item::before {
+    width: 0px;
+}

@@ -1,0 +1,5 @@
+" Disables bell in ideavim, because visuall bell is not implemented.
+" Ideavim does not understand `:set noerrorbells`
+set visualbell
+imap jj <esc>
+map Y y$

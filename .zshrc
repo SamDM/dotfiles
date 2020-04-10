@@ -29,6 +29,9 @@ compinit
 # Therefore, this is the most 'global' place to export variables.
 export PATH=~/.local/bin:$PATH
 
+# enable snap packages
+# emulate sh -c 'source /etc/profile.d/apps-bin-path.sh'
+
 # Enables colors and italics in neovim
 export EDITOR=nvim
 
