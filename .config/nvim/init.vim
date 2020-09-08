@@ -28,7 +28,6 @@ Plug 'chrisbra/csv.vim'
 Plug 'chrisbra/unicode.vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'jalvesaq/Nvim-R'
-Plug 'tyrannicaltoucan/vim-deep-space'
 Plug 'junegunn/vim-easy-align'
 Plug 'qpkorr/vim-bufkill'
 

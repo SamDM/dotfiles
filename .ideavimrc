@@ -3,3 +3,4 @@
 set visualbell
 imap jj <esc>
 map Y y$
+set ideajoin
