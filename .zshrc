@@ -123,3 +123,18 @@ function terminaltest {
   echo -e "\e[9mstrikethrough\e[0m"
 }
 
+# Opens a temp R file in the current dir
+# Pre loaded with tidyverse :)
+function rHere {
+  FILENAME=$(date | sed 's/ \+/-/g' | sed 's/:/h/'| sed 's/:/m/' | sed 's/\(.*\)/rHere_\1.R/')
+  FILEPATH="/tmp/$FILENAME"
+  CWD=$(pwd)
+  echo "setwd('${CWD}')\nlibrary(tidyverse)" >> $FILEPATH
+  nvim $FILEPATH
+}
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/home/sam/y/google-cloud-sdk/path.zsh.inc' ]; then . '/home/sam/y/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/home/sam/y/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/sam/y/google-cloud-sdk/completion.zsh.inc'; fi

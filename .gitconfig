@@ -7,3 +7,4 @@
   name  = Sam De Meyer
 [core]
   excludesfile = /home/sam/.gitignore
+	autocrlf = input
