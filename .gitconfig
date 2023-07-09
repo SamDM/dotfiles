@@ -8,3 +8,5 @@
 [core]
   excludesfile = /home/sam/.gitignore
 	autocrlf = input
+[credential]
+	helper = cache
