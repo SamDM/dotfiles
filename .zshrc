@@ -21,21 +21,6 @@ autoload -Uz compinit
 compinit
 
 #-------------------------------------------------------------------------------
-# Variable exports
-#-------------------------------------------------------------------------------
-
-# Since I do a tty login and then start i3 with startx, the `.zshrc` config
-# will be sourced first before any other such as `.xinitrc`, `.profile`, etc.
-# Therefore, this is the most 'global' place to export variables.
-export PATH=~/.local/bin:$PATH
-
-# enable snap packages
-# emulate sh -c 'source /etc/profile.d/apps-bin-path.sh'
-
-# Enables colors and italics in neovim
-export EDITOR=nvim
-
-#-------------------------------------------------------------------------------
 # Prompt
 #-------------------------------------------------------------------------------
 
