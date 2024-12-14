@@ -31,8 +31,8 @@ function conda_env {
 }
 
 function zle-line-init zle-keymap-select {
-    PRE=$'%F{159}╭%n@%M:%L %30<...<%~%<<% %f %F{223}❖%f %F{159}%w %T%f %(?..%F{125}✘%?%f )%(1j.%F{215}::%j.%f)\n'
-    MOD="%F{159}╰%f$(conda_env)${${KEYMAP/vicmd/%F{198\}X%f }/(main|viins)/%F{223\}$%f }"
+    PRE=$'%F{158}╭%n@%M:%L %30<...<%~%<<% %f %F{223}❖%f %F{158}%w %T%f %(?..%F{125}✘%?%f )%(1j.%F{215}::%j.%f)\n'
+    MOD="%F{158}╰%f$(conda_env)${${KEYMAP/vicmd/%F{198\}X%f }/(main|viins)/%F{223\}$%f }"
     PS1=$PRE$MOD
     zle reset-prompt
 }
@@ -118,8 +118,22 @@ function rHere {
   nvim $FILEPATH
 }
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/home/sam/y/google-cloud-sdk/path.zsh.inc' ]; then . '/home/sam/y/google-cloud-sdk/path.zsh.inc'; fi
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/sam/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/sam/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/sam/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/sam/miniconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
 
-# The next line enables shell command completion for gcloud.
-if [ -f '/home/sam/y/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/sam/y/google-cloud-sdk/completion.zsh.inc'; fi
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
