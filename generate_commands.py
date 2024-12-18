@@ -7,12 +7,12 @@ import os
 import re
 
 ignore_paths = [
-    ".*\.git",
-    ".*\.git/.*",
-    ".*\.keep",
-    ".*\.idea",
-    ".*\.idea/.*",
-    ".*generate_commands.py",
+    r".*\.git",
+    r".*\.git/.*",
+    r".*\.keep",
+    r".*\.idea",
+    r".*\.idea/.*",
+    r".*generate_commands.py",
 ]
 
 home = os.path.expanduser("~")
