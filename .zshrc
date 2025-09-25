@@ -31,8 +31,8 @@ function conda_env {
 }
 
 function zle-line-init zle-keymap-select {
-    PRE=$'%F{158}╭%n@%M:%L %30<...<%~%<<% %f %F{223}❖%f %F{158}%w %T%f %(?..%F{125}✘%?%f )%(1j.%F{215}::%j.%f)\n'
-    MOD="%F{158}╰%f$(conda_env)${${KEYMAP/vicmd/%F{198\}X%f }/(main|viins)/%F{223\}$%f }"
+    PRE=$'%F{45}╭%n@%M:%L %30<...<%~%<<% %f %F{223}❖%f %F{45}%w %T%f %(?..%F{125}✘%?%f )%(1j.%F{215}::%j.%f)\n'
+    MOD="%F{45}╰%f$(conda_env)${${KEYMAP/vicmd/%F{198\}X%f }/(main|viins)/%F{223\}$%f }"
     PS1=$PRE$MOD
     zle reset-prompt
 }

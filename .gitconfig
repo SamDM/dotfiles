@@ -3,10 +3,8 @@
   hist  = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
   graph = log --graph --all --pretty=format:\"%C(yellow)%h%Creset%C(cyan)%C(bold)%d%Creset %C(cyan)%cr%Creset %C(green)%cN%Creset %+s\"
 [user]
-  email = sam.demeyer93@gmail.com
+  email = samey@psb.vib-ugent.be
   name  = Sam De Meyer
 [core]
   excludesfile = /home/sam/.gitignore
-	autocrlf = input
-[credential]
-	helper = cache
+  autocrlf = input
