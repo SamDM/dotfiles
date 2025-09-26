@@ -13,6 +13,8 @@ ignore_paths = [
     r".*\.idea",
     r".*\.idea/.*",
     r".*generate_commands.py",
+    r".*\.png",
+    r".*\.kksrc",
 ]
 
 home = os.path.expanduser("~")
