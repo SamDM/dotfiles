@@ -99,7 +99,7 @@ function rHere {
 # auto-ignore huge git directory
 alias tree='tree -I .git'
 
-# alias tmux='TERM=xterm tmux'
+alias tmux='module load tmux; tmux'
 
 #-------------------------------------------------------------------------------
 # Prompt
