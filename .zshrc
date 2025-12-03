@@ -1,4 +1,12 @@
 #-------------------------------------------------------------------------------
+# Set env
+#-------------------------------------------------------------------------------
+
+if [ -f "$HOME/.profile" ]; then
+    . "$HOME/.profile"
+fi
+
+#-------------------------------------------------------------------------------
 # General options
 #-------------------------------------------------------------------------------
 
@@ -56,13 +64,6 @@ alias grep='grep --color=auto'
 
 # Shortcuts and random stuff
 alias partinfo='lsblk -o NAME,SIZE,FSTYPE,MOUNTPOINT,UUID,LABEL,PARTUUID,PARTTYPE'
-alias clearpackcache='sudo paccache -r && sudo paccache -ruk0'
-
-# Use vim as a pager
-alias vip='nvim -R -'
-# Easily launch a desktop app as a child process of the ?? thread from within
-# the terminal
-alias opn='xdg-open'
 
 # Test if terminal is truecolor or not
 function terminaltest {
@@ -98,11 +99,7 @@ function rHere {
 # auto-ignore huge git directory
 alias tree='tree -I .git'
 
-#-------------------------------------------------------------------------------
-# env
-#-------------------------------------------------------------------------------
-
-. "$HOME/.local/bin/env"
+alias tmux='TERM=xterm tmux'
 
 #-------------------------------------------------------------------------------
 # Prompt
