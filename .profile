@@ -3,6 +3,7 @@
 # generally useful
 export EDITOR=hx
 export COLORTERM=truecolor
+export TERMINFO="$HOME/.terminfo"
 
 # Add rust/cargo to path
 if [ -f "$HOME/.cargo/env" ]; then

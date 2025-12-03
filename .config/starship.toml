@@ -142,7 +142,7 @@ format = '[$user]($style) @ '
 [hostname]
 ssh_only = false
 ssh_symbol = "ssh "
-style = "bright-green bold"
+style = "bright-blue bold"
 format = '[$ssh_symbol$hostname]($style) '
 
 [java]
