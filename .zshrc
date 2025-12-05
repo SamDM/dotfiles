@@ -64,11 +64,6 @@ alias grep='grep --color=auto'
 
 # Shortcuts and random stuff
 alias partinfo='lsblk -o NAME,SIZE,FSTYPE,MOUNTPOINT,UUID,LABEL,PARTUUID,PARTTYPE'
-alias clearpackcache='sudo paccache -r && sudo paccache -ruk0'
-
-# Easily launch a desktop app as a child process of the ?? thread from within
-# the terminal
-alias opn='xdg-open'
 
 # Test if terminal is truecolor or not
 function terminaltest {
@@ -90,20 +85,5 @@ function terminaltest {
   echo -e "\e[4munderline\e[0m"
   echo -e "\e[9mstrikethrough\e[0m"
 }
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/samdm/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/samdm/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/samdm/miniconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/samdm/miniconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
 
 eval "$(starship init zsh)"
