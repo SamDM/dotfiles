@@ -1,4 +1,12 @@
 #-------------------------------------------------------------------------------
+# Set env
+#-------------------------------------------------------------------------------
+
+if [ -f "$HOME/.profile" ]; then
+    . "$HOME/.profile"
+fi
+
+#-------------------------------------------------------------------------------
 # General options
 #-------------------------------------------------------------------------------
 
@@ -19,27 +27,6 @@ bindkey -v
 # start zsh completion engine
 autoload -Uz compinit
 compinit
-
-#-------------------------------------------------------------------------------
-# Prompt
-#-------------------------------------------------------------------------------
-
-function conda_env {
-    if [[ -n $CONDA_DEFAULT_ENV ]]; then
-        echo ' %F{34}`-._.-'"''"'-:>%f%F{160}~%f '"$CONDA_DEFAULT_ENV "
-    fi
-}
-
-function zle-line-init zle-keymap-select {
-    PRE=$'%F{158}╭%n@%M:%L %30<...<%~%<<% %f %F{223}❖%f %F{158}%w %T%f %(?..%F{125}✘%?%f )%(1j.%F{215}::%j.%f)\n'
-    MOD="%F{158}╰%f$(conda_env)${${KEYMAP/vicmd/%F{198\}X%f }/(main|viins)/%F{223\}$%f }"
-    PS1=$PRE$MOD
-    zle reset-prompt
-}
-# ```
-
-zle -N zle-line-init
-zle -N zle-keymap-select
 
 #-------------------------------------------------------------------------------
 # keybindings
@@ -79,8 +66,6 @@ alias grep='grep --color=auto'
 alias partinfo='lsblk -o NAME,SIZE,FSTYPE,MOUNTPOINT,UUID,LABEL,PARTUUID,PARTTYPE'
 alias clearpackcache='sudo paccache -r && sudo paccache -ruk0'
 
-# Use vim as a pager
-alias vip='nvim -R -'
 # Easily launch a desktop app as a child process of the ?? thread from within
 # the terminal
 alias opn='xdg-open'
@@ -106,12 +91,19 @@ function terminaltest {
   echo -e "\e[9mstrikethrough\e[0m"
 }
 
-# Opens a temp R file in the current dir
-# Pre loaded with tidyverse :)
-function rHere {
-  FILENAME=$(date | sed 's/ \+/-/g' | sed 's/:/h/'| sed 's/:/m/' | sed 's/\(.*\)/rHere_\1.R/')
-  FILEPATH="/tmp/$FILENAME"
-  CWD=$(pwd)
-  echo "setwd('${CWD}')\nlibrary(tidyverse)" >> $FILEPATH
-  nvim $FILEPATH
-}
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/samdm/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/samdm/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/samdm/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/samdm/miniconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+eval "$(starship init zsh)"
