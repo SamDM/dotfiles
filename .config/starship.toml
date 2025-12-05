@@ -143,7 +143,7 @@ format = '[$user]($style) @ '
 ssh_only = false
 ssh_symbol = "ssh "
 style = "bright-green bold"
-format = '[$ssh_symbol$hostname]($style)'
+format = '[$ssh_symbol$hostname]($style) '
 
 [java]
 symbol = "java "
@@ -305,7 +305,7 @@ symbol = "scala "
 [shlvl]
 format = '[$symbol$shlvl]($style) '
 style = "bright-green bold"
-symbol = " :"
+symbol = ":"
 disabled = false
 
 [spack]
@@ -343,4 +343,3 @@ symbol = "xmake "
 
 [zig]
 symbol = "zig "
-
