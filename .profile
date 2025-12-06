@@ -2,6 +2,8 @@
 
 # generally useful
 export EDITOR=hx
+export COLORTERM=truecolor
+export HELIX_RUNTIME=/user/gent/421/vsc42121/vsc_data/Software/helix/runtime
 
 # Add rust/cargo to path
 if [ -f "$HOME/.cargo/env" ]; then
