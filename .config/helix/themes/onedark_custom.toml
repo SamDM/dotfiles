@@ -1,0 +1,4 @@
+inherits = "onedark"
+
+"ui.background" = {}
+"ui.virtual.jump-label" = { fg = "gold", modifiers = ["bold", "underlined"] }
