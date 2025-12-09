@@ -102,6 +102,51 @@ alias tree='tree -I .git'
 alias tmux='module load tmux; tmux'
 
 #-------------------------------------------------------------------------------
+# Super ugly hack to prevent midas from clearing my screen on logout
+#-------------------------------------------------------------------------------
+
+# The uglyness below preserves normal behavior of `clear` and <CTRL-D>,
+# but inserts a `clear` override on exiting midas.
+
+setopt IGNORE_EOF
+
+function neuter_clear_and_exit() {
+    # echo "neuter called"
+
+    # Define a function 'clear' that does nothing
+    function clear() { :; }
+
+    # Actually exit the shell
+    builtin exit
+}
+
+function exit() {
+    # echo "exit called"
+
+    neuter_clear_and_exit
+}
+
+function ctrl_d_exit_wrapper() {
+    # echo "ctrl_d_exit_wrapper called"
+
+    # If the command line is NOT empty, behave like normal delete
+    if [[ -n $BUFFER ]]; then
+        zle delete-char-or-list
+        return
+    fi
+
+    # If line is empty (EOF), run our clean exit
+    neuter_clear_and_exit
+}
+
+# Register the widget and bind it to CTRL-D
+zle -N ctrl_d_exit_wrapper
+bindkey '^D' ctrl_d_exit_wrapper
+bindkey -M emacs '^D' ctrl_d_exit_wrapper
+bindkey -M viins '^D' ctrl_d_exit_wrapper
+bindkey -M vicmd '^D' ctrl_d_exit_wrapper
+
+#-------------------------------------------------------------------------------
 # Prompt
 #-------------------------------------------------------------------------------
 
