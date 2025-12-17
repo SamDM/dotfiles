@@ -1,4 +1,4 @@
-theme = "onedark"
+theme = "onedark_custom"
 
 [editor]
 line-number = "relative"
@@ -7,6 +7,9 @@ line-number = "relative"
 insert = "bar"
 normal = "block"
 select = "underline"
+
+[keys.normal]
+"S-v" = "@ghvX"
 
 [keys.normal.space.h]
 h = ":toggle-option file-picker.hidden"

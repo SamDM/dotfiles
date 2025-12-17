@@ -1,4 +1,12 @@
 #-------------------------------------------------------------------------------
+# Set env
+#-------------------------------------------------------------------------------
+
+if [ -f "$HOME/.profile" ]; then
+    . "$HOME/.profile"
+fi
+
+#-------------------------------------------------------------------------------
 # General options
 #-------------------------------------------------------------------------------
 
@@ -85,16 +93,6 @@ function terminaltest {
   echo -e "\e[9mstrikethrough\e[0m"
 }
 
-# Opens a temp R file in the current dir
-# Pre loaded with tidyverse :)
-function rHere {
-  FILENAME=$(date | sed 's/ \+/-/g' | sed 's/:/h/'| sed 's/:/m/' | sed 's/\(.*\)/rHere_\1.R/')
-  FILEPATH="/tmp/$FILENAME"
-  CWD=$(pwd)
-  echo "setwd('${CWD}')\nlibrary(tidyverse)" >> $FILEPATH
-  nvim $FILEPATH
-}
-
 # auto-ignore huge git directory
 alias tree='tree -I .git'
 
@@ -102,7 +100,7 @@ alias tree='tree -I .git'
 # env
 #-------------------------------------------------------------------------------
 
-. "$HOME/.local/bin/env"
+export EDITOR=hx
 
 #-------------------------------------------------------------------------------
 # Prompt

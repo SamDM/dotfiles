@@ -6,5 +6,5 @@
   email = samey@psb.vib-ugent.be
   name  = Sam De Meyer
 [core]
-  excludesfile = /home/sam/.gitignore
+  excludesfile = /home/samey/.gitignore
   autocrlf = input
