@@ -1,0 +1,6 @@
+[Unit]
+Description=Force-unmount unresponsive kio-fuse mounts
+
+[Service]
+Type=oneshot
+ExecStart=%h/.local/bin/kio-fuse-watchdog.sh

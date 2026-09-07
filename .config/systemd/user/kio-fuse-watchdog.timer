@@ -1,0 +1,10 @@
+[Unit]
+Description=Periodically check kio-fuse mounts for responsiveness
+
+[Timer]
+OnBootSec=30s
+OnUnitActiveSec=30s
+AccuracySec=5s
+
+[Install]
+WantedBy=timers.target
