@@ -8,3 +8,5 @@
 [core]
   excludesfile = /home/samey/.gitignore
   autocrlf = input
+[init]
+	defaultBranch = main
