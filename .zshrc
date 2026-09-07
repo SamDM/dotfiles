@@ -66,8 +66,6 @@ alias grep='grep --color=auto'
 alias partinfo='lsblk -o NAME,SIZE,FSTYPE,MOUNTPOINT,UUID,LABEL,PARTUUID,PARTTYPE'
 alias clearpackcache='sudo paccache -r && sudo paccache -ruk0'
 
-# Use vim as a pager
-alias vip='nvim -R -'
 # Easily launch a desktop app as a child process of the ?? thread from within
 # the terminal
 alias opn='xdg-open'
